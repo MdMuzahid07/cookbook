@@ -46,18 +46,18 @@ const MainNavbar = () => {
                     <p className="font-bold text-lg text-yellow-500 ml-2">CookBook</p>
                 </NavbarBrand>
                 <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Features
-                    </Link>
-                </NavbarItem>
-                <NavbarItem isActive>
-                    <Link href="#" aria-current="page" color="warning">
-                        Customers
+                    <Link color="foreground" href="/recipe">
+                        Recipe Feed
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Integrations
+                    <Link color="foreground" href="/about">
+                        About Us
+                    </Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Link color="foreground" href="/contact">
+                        Contact Us
                     </Link>
                 </NavbarItem>
             </NavbarContent>
@@ -96,14 +96,25 @@ const MainNavbar = () => {
                             <p className="font-semibold">Signed in as</p>
                             <p className="font-semibold">zoey@example.com</p>
                         </DropdownItem>
-                        <DropdownItem key="settings">My Settings</DropdownItem>
-                        <DropdownItem key="team_settings">Team Settings</DropdownItem>
-                        <DropdownItem key="analytics">Analytics</DropdownItem>
-                        <DropdownItem key="system">System</DropdownItem>
-                        <DropdownItem key="configurations">Configurations</DropdownItem>
-                        <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-                        <DropdownItem key="logout" color="danger">
-                            Log Out
+                        <DropdownItem>
+                            <Link className="text-md font-bold text-slate-700" href="/profile">
+                                My Profile
+                            </Link>
+                        </DropdownItem>
+                        <DropdownItem>
+                            <Link className="text-md font-bold text-slate-700" href="#">
+                                Dashboard
+                            </Link>
+                        </DropdownItem>
+                        <DropdownItem>
+                            <Link className="text-md font-bold text-slate-700" href="/login">
+                                Register/Login
+                            </Link>
+                        </DropdownItem>
+                        <DropdownItem color="danger">
+                            <span className="text-md font-bold text-slate-700">
+                                Log Out
+                            </span>
                         </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
