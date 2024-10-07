@@ -68,7 +68,7 @@ const MainFooter = () => {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="mt-10 border-t border-gray-700 py-10 text-center text-sm">
+                <div className="mt-10 border-t border-slate-700 py-10 text-center text-sm">
                     <p>&copy; 2024 CookBook. All Rights Reserved.</p>
                 </div>
             </div>

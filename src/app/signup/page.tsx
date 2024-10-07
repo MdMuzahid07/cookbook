@@ -1,89 +1,119 @@
 "use client"
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
 
+// Define the form data type
+interface FormData {
+    name: string;
+    email: string;
+    password: string;
+    profileImage: File | null;
+}
 
-const SignUp = () => {
-    const router = useRouter();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
+const RegisterPage = () => {
+    // Set up form state with typed FormData
+    const [formData, setFormData] = useState<FormData>({
+        name: "",
+        email: "",
+        password: "",
+        profileImage: null,
     });
 
+    // Handle input changes for text fields
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        // You can replace this with actual authentication logic
-        if (formData.name && formData.email && formData.password) {
-            alert('SignUp successful!');
-            router.push('/dashboard'); // Redirect to a dashboard or any other page
-        } else {
-            alert('Please fill in all fields');
+    // Handle file input changes for profile image
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setFormData({ ...formData, profileImage: e.target.files[0] });
         }
     };
 
+    // Handle form submission
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Handle registration logic here (e.g., submit form data)
+        console.log("Form submitted:", formData);
+    };
+
     return (
-        <div className="flex items-center justify-center min-h-screen bg-yellow-50">
-            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-                <h2 className="text-2xl font-bold mb-6 text-center text-orange-700">SignUp</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block text-sm font-medium text-orange-700">
-                            Name
-                        </label>
-                        <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="w-full p-2 mt-1 border border-orange-300 rounded focus:outline-none focus:ring focus:ring-orange-200"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-sm font-medium text-orange-700">
-                            Email
-                        </label>
-                        <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="w-full p-2 mt-1 border border-orange-300 rounded focus:outline-none focus:ring focus:ring-orange-200"
-                            required
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="password" className="block text-sm font-medium text-orange-700">
-                            Password
-                        </label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="w-full p-2 mt-1 border border-orange-300 rounded focus:outline-none focus:ring focus:ring-orange-200"
-                            required
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full p-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition-colors"
-                    >
-                        SignUp
-                    </button>
-                </form>
+        <div className="bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/f_auto,q_auto/eh393zi22wroqa1u4zon')] bg-no-repeat bg-cover bg-bottom">
+            <div className="min-h-screen flex items-center justify-center bg-slate-950 bg-opacity-45">
+                <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+                    <h2 className="text-2xl font-bold mb-6 text-yellow-500 text-center">Register Account</h2>
+
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                                placeholder="Enter your email"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                                placeholder="Enter your password"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                                className="w-full text-sm text-gray-500
+                         file:mr-4 file:py-2 file:px-4
+                         file:rounded-full file:border-0
+                         file:text-sm file:font-semibold
+                         file:bg-gray-100 file:text-gray-800
+                         hover:file:bg-gray-200"
+                            />
+                        </div>
+
+                        <div>
+                            <p>Already have an account?  <Link href="/login"><span className="font-bold text-yellow-500">Login</span></Link> </p>
+                        </div>
+
+                        <div>
+                            <button
+                                type="submit"
+                                className="w-full bg-yellow-500 text-white py-2 rounded-lg shadow-lg hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2"
+                            >
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );
 };
 
-export default SignUp;
+export default RegisterPage;
