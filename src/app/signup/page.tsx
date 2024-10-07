@@ -41,7 +41,7 @@ const RegisterPage = () => {
 
     return (
         <div className="bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/f_auto,q_auto/eh393zi22wroqa1u4zon')] bg-no-repeat bg-cover bg-bottom">
-            <div className="min-h-screen flex items-center justify-center bg-slate-950 bg-opacity-45">
+            <div className="min-h-screen flex items-center justify-center bg-slate-950 bg-opacity-45 px-4 xl:px-0">
                 <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                     <h2 className="text-2xl font-bold mb-6 text-yellow-500 text-center">Register Account</h2>
 
