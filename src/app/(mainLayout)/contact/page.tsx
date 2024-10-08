@@ -19,15 +19,15 @@ const ContactPage: React.FC = () => {
     };
 
     return (
-        <section className="bg-gray-100">
+        <section className="bg-gray-100 w-screen">
             <div className="bg-yellow-500 py-16">
-                <div className="container mx-auto text-center">
+                <div className="max-w-7xl mx-auto text-center">
                     <h1 className="text-4xl md:text-6xl font-bold  mb-2">Get in Touch</h1>
                     <p className="text-xl">We value your input and can’t wait to hear from you!</p>
                 </div>
             </div>
 
-            <section className="bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/v1728294406/2148517039_n093tf.jpg')] bg-cover bg-no-repeat bg-center">
+            <div className="bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/v1728294406/2148517039_n093tf.jpg')] bg-cover bg-no-repeat bg-center w-full h-screen">
                 <section className="bg-slate-950 bg-opacity-45 min-h-screen z-50 flex items-center justify-center px-4 py-8">
                     <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-3xl">
                         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Contact Us</h2>
@@ -86,7 +86,7 @@ const ContactPage: React.FC = () => {
                         </form>
                     </div>
                 </section>
-            </section>
+            </div>
         </section>
     );
 };

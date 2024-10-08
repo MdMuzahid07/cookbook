@@ -17,7 +17,7 @@ const MainNavbar = () => {
     ];
 
     return (
-        <Navbar isBordered maxWidth="xl" className="bg-slate-950 text-white">
+        <Navbar maxWidth="xl" className="bg-slate-950 text-white z-50 w-screen" isBordered>
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle />
             </NavbarContent>
@@ -30,7 +30,7 @@ const MainNavbar = () => {
                         width={20}
                         height={20}
                     />
-                    <p className="font-bold text-inherit ml-2">CookBook</p>
+                    <p className="font-bold text-inherit">CookBook</p>
                 </NavbarBrand>
             </NavbarContent>
 
