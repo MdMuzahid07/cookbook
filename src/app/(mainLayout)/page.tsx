@@ -1,7 +1,13 @@
-const HomePage = () => {
+import React from 'react'
+import Banner from './components/recipe/Banner'
+
+const RecipePage = () => {
     return (
-        <div>HomePage</div>
+        <>
+            <Banner />
+
+        </>
     )
 }
 
-export default HomePage
+export default RecipePage

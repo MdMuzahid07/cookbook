@@ -46,7 +46,7 @@ const MainNavbar = () => {
                     <p className="font-bold text-lg text-yellow-500 ml-2">CookBook</p>
                 </NavbarBrand>
                 <NavbarItem>
-                    <Link color="foreground" href="/recipe">
+                    <Link color="foreground" href="/">
                         Recipe Feed
                     </Link>
                 </NavbarItem>
