@@ -3,6 +3,7 @@
 import { Avatar } from '@nextui-org/react';
 import Image from 'next/image';
 import { useState } from 'react';
+import RecipeCard from '../components/recipe/RecipeCard';
 
 // Fake data for demo
 const fakeData = {
@@ -58,7 +59,7 @@ export default function MyProfilePage() {
 
 
     return (
-        <section className="bg-slate-100 min-h-screen">
+        <section className="bg-yellow-500 pb-32 min-h-screen">
             {/* Cover Photo */}
             <section className="h-56 bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg')] relative bg-cover bg-no-repeat bg-center">
                 <div className="max-w-7xl mx-auto">
@@ -70,7 +71,7 @@ export default function MyProfilePage() {
 
             {/* Profile Information */}
 
-            <div className="mt-20 px-6 max-w-7xl mx-auto">
+            <section className="mt-32 px-6 max-w-7xl mx-auto sm:bg-white sm:rounded-2xl sm:p-8 sm:shadow-lg">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div>
                         <h1 className="text-2xl font-bold">{fakeData.displayName}</h1>
@@ -132,29 +133,9 @@ export default function MyProfilePage() {
                 {/* Tab Content */}
                 <div className="mt-6">
                     {activeTab === 'recipes' && (
-                        <div className="space-y-6">
-                            {fakeData.recipes.map((recipe) => (
-                                <div
-                                    key={recipe.id}
-                                    className="bg-white p-4 rounded-2xl shadow-md"
-                                >
-                                    <div className="flex space-x-4">
-                                        <Image
-                                            src={recipe.image}
-                                            alt={recipe.title}
-                                            width={96}
-                                            height={96}
-                                            className="rounded object-cover"
-                                        />
-                                        <div>
-                                            <h3 className="text-lg font-semibold">{recipe.title}</h3>
-                                            <p className="text-gray-600">{recipe.description}</p>
-                                            <p className="text-sm text-gray-500">
-                                                Posted {recipe.createdAt} ago
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                            {fakeData.recipes.map((recipe, index) => (
+                                <RecipeCard key={index} recipe={recipe} />
                             ))}
                         </div>
                     )}
@@ -207,7 +188,7 @@ export default function MyProfilePage() {
                         </div>
                     )}
                 </div>
-            </div>
+            </section>
         </section>
     );
 }
