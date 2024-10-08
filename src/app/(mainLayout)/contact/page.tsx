@@ -29,7 +29,7 @@ const ContactPage: React.FC = () => {
 
             <div className="bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/v1728294406/2148517039_n093tf.jpg')] bg-cover bg-no-repeat bg-center w-full h-screen">
                 <section className="bg-slate-950 bg-opacity-45 min-h-screen z-50 flex items-center justify-center px-4 py-8">
-                    <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-3xl">
+                    <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-3xl">
                         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Contact Us</h2>
                         <p className="text-center text-gray-600 mb-8">
                             Have any questions? Reach out to us, and we’ll get back to you as soon as possible.
@@ -43,7 +43,7 @@ const ContactPage: React.FC = () => {
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                     placeholder="Your name"
                                     required
                                 />
@@ -56,7 +56,7 @@ const ContactPage: React.FC = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                     placeholder="Your email"
                                     required
                                 />
@@ -68,7 +68,7 @@ const ContactPage: React.FC = () => {
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400"
                                     placeholder="Your message"
                                     rows={4}
                                     required
@@ -78,7 +78,7 @@ const ContactPage: React.FC = () => {
                             <div>
                                 <button
                                     type="submit"
-                                    className="w-full bg-yellow-400 text-white py-2 rounded-lg shadow-lg hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2"
+                                    className="w-full bg-yellow-400 text-white py-2 rounded-2xl shadow-lg hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2"
                                 >
                                     Send Message
                                 </button>

@@ -17,7 +17,8 @@ const MainNavbar = () => {
     ];
 
     return (
-        <Navbar maxWidth="xl" className="bg-slate-950 text-white z-50 w-screen" isBordered>
+        <Navbar
+            maxWidth="xl" className="bg-slate-950 text-white z-50 w-screen px-0" >
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle />
             </NavbarContent>
@@ -64,8 +65,9 @@ const MainNavbar = () => {
 
             <NavbarContent as="div" className="items-center" justify="end">
                 <Input
+                    radius="full"
                     classNames={{
-                        base: "max-w-full w-full hidden md:block sm:max-w-[15rem] h-10",
+                        base: "max-w-full w-full hidden md:block sm:max-w-[15rem] h-10 ",
                         mainWrapper: "h-full",
                         input: "text-small",
                         inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",

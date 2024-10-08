@@ -70,7 +70,7 @@ export default function MyProfilePage() {
 
             {/* Profile Information */}
 
-            <div className="mt-20 px-4 max-w-7xl mx-auto">
+            <div className="mt-20 px-6 max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div>
                         <h1 className="text-2xl font-bold">{fakeData.displayName}</h1>
@@ -87,7 +87,7 @@ export default function MyProfilePage() {
                     </div>
                     <button
                         onClick={handleFollow}
-                        className={`mt-4 md:mt-0 px-6 py-2 rounded-lg font-semibold ${isFollowing
+                        className={`mt-4 md:mt-0 px-6 py-2 rounded-2xl font-semibold ${isFollowing
                             ? 'bg-gray-300 text-gray-700'
                             : 'bg-yellow-500 text-white hover:bg-yellow-600'
                             }`}
@@ -136,7 +136,7 @@ export default function MyProfilePage() {
                             {fakeData.recipes.map((recipe) => (
                                 <div
                                     key={recipe.id}
-                                    className="bg-white p-4 rounded-lg shadow-md"
+                                    className="bg-white p-4 rounded-2xl shadow-md"
                                 >
                                     <div className="flex space-x-4">
                                         <Image
@@ -163,7 +163,7 @@ export default function MyProfilePage() {
                             {fakeData.followers.map((follower) => (
                                 <div
                                     key={follower.id}
-                                    className="flex items-center bg-white p-4 rounded-lg shadow-md"
+                                    className="flex items-center bg-white p-4 rounded-2xl shadow-md"
                                 >
                                     <Image
                                         src={follower.profilePicture}
@@ -187,7 +187,7 @@ export default function MyProfilePage() {
                             {fakeData.following.map((followed) => (
                                 <div
                                     key={followed.id}
-                                    className="flex items-center bg-white p-4 rounded-lg shadow-md"
+                                    className="flex items-center bg-white p-4 rounded-2xl shadow-md"
                                 >
                                     <Image
                                         src={followed.profilePicture}

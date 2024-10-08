@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const MainFooter = () => {
     return (
-        <footer className="bg-slate-950 text-gray-200">
-            <div className="max-w-7xl mx-auto pt-20 px-5 md:px-8">
+        <footer className="bg-slate-950 text-gray-200 ">
+            <div className="max-w-7xl mx-auto pt-20 px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <div>
                         <div className="flex items-center gap-2">

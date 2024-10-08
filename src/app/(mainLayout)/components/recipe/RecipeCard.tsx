@@ -1,17 +1,47 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Avatar } from "@nextui-org/avatar";
-import { motion } from "framer-motion";
+import { motion, useAnimation, useInView } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 const RecipeCard = ({ recipe, delay }: any) => {
+    const router = useRouter();
+    // this hook used to control the animation
+    const controls = useAnimation();
+    // this for Reference to the card element
+    const ref = useRef(null);
+    // Check if in view the card
+    const isInView = useInView(ref, { once: true });
+
+
+    useEffect(() => {
+        if (isInView) {
+            controls.start("visible");
+        } else {
+            controls.start("hidden");
+        }
+    }, [isInView, controls]);
+
+
+    const handleClick = (id: string) => {
+        router.push(`/${id}`)
+    }
+
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
+            ref={ref}
+            initial="hidden"
+            animate={controls}
+            variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 50 },
+            }}
             transition={{ duration: 0.5, delay, ease: "easeInOut" }}
         >
-            <section className="w-full mx-auto border-2 border-slate-100 bg-slate-950 text-slate-400 rounded-xl transition duration-300 cursor-pointer text-left hover:scale-105">
+            <section onClick={() => handleClick("90698067FakeId")} className="w-full mx-auto border-2 border-slate-100 bg-slate-950 text-slate-400 rounded-2xl transition duration-300 cursor-pointer text-left hover:scale-105">
                 <div className="p-4">
                     {/* Post Header */}
                     <div className="flex items-center space-x-3">

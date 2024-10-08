@@ -124,7 +124,7 @@ const RecipeFeed = () => {
     return (
         <section className="bg-yellow-500">
             <Banner />
-            <section className="max-w-7xl mx-auto px-4 xl:px-0  py-20">
+            <section className="max-w-7xl mx-auto px-6 py-20">
                 <section className="pt-10">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
@@ -148,8 +148,8 @@ const RecipeFeed = () => {
                 </section>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
                     {filteredRecipes?.length > 0 ? (
-                        filteredRecipes?.map((recipe: any) => (
-                            <RecipeCard key={recipe._id} recipe={recipe} />
+                        filteredRecipes?.map((recipe: any, index: number) => (
+                            <RecipeCard delay={index * 0.1} key={recipe._id} recipe={recipe} />
                         ))
                     ) : (
                         <p className="text-gray-200 text-3xl font-bold">No recipes found.</p>
