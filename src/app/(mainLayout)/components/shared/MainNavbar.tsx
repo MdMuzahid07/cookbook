@@ -99,22 +99,22 @@ const MainNavbar = () => {
                             <p className="font-semibold">zoey@example.com</p>
                         </DropdownItem>
                         <DropdownItem>
-                            <Link className="text-md font-bold text-slate-700" href="/profile">
+                            <Link className="text-md font-bold h-5 text-slate-700" href="/profile">
                                 My Profile
                             </Link>
                         </DropdownItem>
                         <DropdownItem>
-                            <Link className="text-md font-bold text-slate-700" href="#">
+                            <Link className="text-md font-bold h-5 text-slate-700" href="/dashboard/my-profile">
                                 Dashboard
                             </Link>
                         </DropdownItem>
                         <DropdownItem>
-                            <Link className="text-md font-bold text-slate-700" href="/login">
+                            <Link className="text-md font-bold h-5 text-slate-700" href="/login">
                                 Register/Login
                             </Link>
                         </DropdownItem>
                         <DropdownItem color="danger">
-                            <span className="text-md font-bold text-slate-700">
+                            <span className="text-md font-bold h-5 text-slate-700">
                                 Log Out
                             </span>
                         </DropdownItem>
