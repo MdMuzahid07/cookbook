@@ -61,7 +61,7 @@ export default function MyProfilePage() {
     return (
         <section className="bg-yellow-500 pb-32 min-h-screen">
             {/* Cover Photo */}
-            <section className="h-56 bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg')] relative bg-cover bg-no-repeat bg-center">
+            <section className="h-56 bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/v1728455725/6470_yvgrhg.jpg')] relative bg-cover bg-no-repeat bg-center">
                 <div className="max-w-7xl mx-auto">
                     <div className="absolute -bottom-16 pl-4">
                         <Avatar src={fakeData.profilePicture} className="w-40 h-40 text-large ring-4 ring-white" />
@@ -71,9 +71,9 @@ export default function MyProfilePage() {
 
             {/* Profile Information */}
 
-            <section className="mt-32 px-6 max-w-7xl mx-auto sm:bg-white sm:rounded-2xl sm:p-8 sm:shadow-lg">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div>
+            <section className="mt-32 px-6 max-w-7xl mx-auto min-h-screen sm:bg-white sm:rounded-2xl sm:p-8 sm:shadow-lg">
+                <section className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <section>
                         <h1 className="text-2xl font-bold">{fakeData.displayName}</h1>
                         <p className="text-gray-600">@{fakeData.username}</p>
                         <p className="mt-2">{fakeData.bio}</p>
@@ -85,17 +85,37 @@ export default function MyProfilePage() {
                                 <strong>{fakeData.followingCount}</strong> Following
                             </span>
                         </div>
-                    </div>
-                    <button
-                        onClick={handleFollow}
-                        className={`mt-4 md:mt-0 px-6 py-2 rounded-2xl font-semibold ${isFollowing
-                            ? 'bg-gray-300 text-gray-700'
-                            : 'bg-yellow-500 text-white hover:bg-yellow-600'
-                            }`}
-                    >
-                        {isFollowing ? 'UnFollow' : 'Follow'}
-                    </button>
-                </div>
+                    </section>
+                    <section>
+                        <button
+                            onClick={handleFollow}
+                            className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
+                                ? 'bg-slate-950 text-white'
+                                : ' bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600'
+                                }`}
+                        >
+                            {isFollowing ? 'UnFollow' : 'Follow'}
+                        </button>
+                        <button
+                            onClick={handleFollow}
+                            className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
+                                ? 'bg-slate-950 text-white'
+                                : ' bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600'
+                                }`}
+                        >
+                            {isFollowing ? 'UnFollow' : 'Follow'}
+                        </button>
+                        <button
+                            onClick={handleFollow}
+                            className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
+                                ? 'bg-slate-950 text-white'
+                                : ' bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600'
+                                }`}
+                        >
+                            {isFollowing ? 'UnFollow' : 'Follow'}
+                        </button>
+                    </section>
+                </section>
 
                 {/* Tabs */}
                 <div className="mt-8 border-b border-gray-300">
@@ -132,25 +152,23 @@ export default function MyProfilePage() {
 
                 {/* Tab Content */}
                 <div className="mt-6">
-                    {activeTab === 'recipes' && (
+                    {activeTab === "recipes" && (
                         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
                             {fakeData.recipes.map((recipe, index) => (
                                 <RecipeCard key={index} recipe={recipe} />
                             ))}
                         </div>
                     )}
-                    {activeTab === 'followers' && (
-                        <div className="space-y-4">
+                    {activeTab === "followers" && (
+                        <div className="space-y-4 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {fakeData.followers.map((follower) => (
                                 <div
                                     key={follower.id}
-                                    className="flex items-center bg-white p-4 rounded-2xl shadow-md"
+                                    className="flex items-center bg-slate-100 p-4 rounded-2xl shadow-md"
                                 >
-                                    <Image
+                                    <Avatar
                                         src={follower.profilePicture}
                                         alt={follower.username}
-                                        width={48}
-                                        height={48}
                                         className="rounded-full object-cover"
                                     />
                                     <div className="ml-4">
@@ -163,7 +181,7 @@ export default function MyProfilePage() {
                             ))}
                         </div>
                     )}
-                    {activeTab === 'following' && (
+                    {activeTab === "following" && (
                         <div className="space-y-4">
                             {fakeData.following.map((followed) => (
                                 <div
