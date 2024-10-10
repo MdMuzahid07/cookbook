@@ -1,36 +1,36 @@
 "use client"
+import { useUserLogin } from "@/hooks/auth.hook";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 
-// Define the form data type
-interface FormData {
-    name: string;
+interface TLoginData {
     email: string;
     password: string;
-    profileImage: File | null;
 }
 
 const LoginPage = () => {
-    // Set up form state with typed FormData
-    const [formData, setFormData] = useState<FormData>({
-        name: "",
+    const { mutate: login, isPending } = useUserLogin();
+
+    const [loginData, setLoginData] = useState<TLoginData>({
         email: "",
         password: "",
-        profileImage: null,
     });
 
-    // Handle input changes for text fields
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setLoginData({ ...loginData, [name]: value });
     };
 
 
-    // Handle form submission
+    if (isPending) {
+        toast.loading("working...", { id: "userSuccessfulLoginToastId" })
+    }
+
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle registration logic here (e.g., submit form data)
-        console.log("Form submitted:", formData);
+        login(loginData);
     };
 
     return (
@@ -46,7 +46,7 @@ const LoginPage = () => {
                             <input
                                 type="email"
                                 name="email"
-                                value={formData.email}
+                                value={loginData.email}
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-400"
                                 placeholder="Enter your email"
@@ -58,7 +58,7 @@ const LoginPage = () => {
                             <input
                                 type="password"
                                 name="password"
-                                value={formData.password}
+                                value={loginData.password}
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-400"
                                 placeholder="Enter your password"

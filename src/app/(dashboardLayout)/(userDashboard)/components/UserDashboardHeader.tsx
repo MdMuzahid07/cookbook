@@ -4,6 +4,7 @@
 import { Avatar } from "@nextui-org/avatar";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/navbar";
+import Link from "next/link";
 
 const UserDashboardHeader = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
 
@@ -48,12 +49,7 @@ const UserDashboardHeader = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
                             <p className="font-semibold">Signed in as</p>
                             <p className="font-semibold">zoey@example.com</p>
                         </DropdownItem>
-                        <DropdownItem key="settings">My Settings</DropdownItem>
-                        <DropdownItem key="team_settings">Team Settings</DropdownItem>
-                        <DropdownItem key="analytics">Analytics</DropdownItem>
-                        <DropdownItem key="system">System</DropdownItem>
-                        <DropdownItem key="configurations">Configurations</DropdownItem>
-                        <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+                        <DropdownItem as={Link} href="/">Back Home</DropdownItem>
                         <DropdownItem key="logout" color="danger">
                             Log Out
                         </DropdownItem>

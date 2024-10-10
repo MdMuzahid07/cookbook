@@ -131,7 +131,7 @@ const MyProfilePageDashboard = () => {
 
     const formatDate = (dateString: any) => {
         const options = { year: "numeric", month: "long", day: "numeric" };
-        return new Date(dateString).toLocaleDateString(undefined, options);
+        return new Date(dateString).toLocaleDateString(undefined, options as any);
     };
 
 

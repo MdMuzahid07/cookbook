@@ -1,42 +1,67 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
+import { useUserRegistration } from "@/hooks/auth.hook";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 
-// Define the form data type
-interface FormData {
+export interface TRegister {
     name: string;
     email: string;
     password: string;
-    profileImage: File | null;
+    bio: string;
+    avatar: File | null;
 }
 
 const RegisterPage = () => {
-    // Set up form state with typed FormData
-    const [formData, setFormData] = useState<FormData>({
+    const { mutate: registration, isPending } = useUserRegistration();
+
+    const [formData, setFormData] = useState<TRegister>({
         name: "",
         email: "",
         password: "",
-        profileImage: null,
+        bio: "",
+        avatar: null,
     });
 
-    // Handle input changes for text fields
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    // Handle file input changes for profile image
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            setFormData({ ...formData, profileImage: e.target.files[0] });
+            setFormData({ ...formData, avatar: e.target.files[0] });
         }
     };
 
-    // Handle form submission
-    const handleSubmit = (e: React.FormEvent) => {
+
+    if (isPending) {
+        toast.loading("working...", { id: "userRegisterToastId" })
+    }
+
+
+    const handleRegistration = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle registration logic here (e.g., submit form data)
-        console.log("Form submitted:", formData);
+
+
+        const userData = {
+            name: formData?.name,
+            email: formData?.email,
+            password: formData?.password,
+            bio: formData?.bio
+        }
+
+
+        const userInfo = new FormData();
+        userInfo.append("data", JSON.stringify(userData));
+
+        if (formData.avatar) {
+            userInfo.append("avatar", formData.avatar);
+        }
+
+        registration(userInfo as any);
     };
 
     return (
@@ -45,7 +70,7 @@ const RegisterPage = () => {
                 <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
                     <h2 className="text-2xl font-bold mb-6 text-yellow-500 text-center">Register Account</h2>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleRegistration} className="space-y-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                             <input
@@ -69,6 +94,19 @@ const RegisterPage = () => {
                                 placeholder="Enter your email"
                             />
                         </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                            <input
+                                type="bio"
+                                name="bio"
+                                value={formData.bio}
+                                onChange={handleChange}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                                placeholder="Your bio"
+                            />
+                        </div>
+
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>

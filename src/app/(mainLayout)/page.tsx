@@ -113,6 +113,7 @@ const recipes = [
 const RecipeFeed = () => {
     const [search, setSearch] = useState("");
 
+
     const filteredRecipes = recipes?.filter(recipe =>
         recipe?.title?.toLowerCase()?.includes(search.toLowerCase())
     );

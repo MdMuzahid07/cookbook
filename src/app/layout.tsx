@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Providers } from "./providers";
+import { Providers } from "@/lib/Providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "CookBook",
   description: "CookBook is a recipe sharing website",
 };
+
 
 export default function RootLayout({
   children,
