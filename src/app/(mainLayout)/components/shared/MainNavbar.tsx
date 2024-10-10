@@ -98,24 +98,24 @@ const MainNavbar = () => {
                             <p className="font-semibold">Signed in as</p>
                             <p className="font-semibold">zoey@example.com</p>
                         </DropdownItem>
-                        <DropdownItem>
-                            <Link className="text-md font-bold h-5 text-slate-700" href="/profile">
+                        <DropdownItem as={Link} href="/profile">
+                            <span className="w-ful h-full text-md font-bold text-slate-700">
                                 My Profile
-                            </Link>
+                            </span>
                         </DropdownItem>
-                        <DropdownItem>
-                            <Link className="text-md font-bold h-5 text-slate-700" href="/dashboard/my-profile">
+                        <DropdownItem as={Link} href="/dashboard/my-profile">
+                            <span className="w-ful h-full text-md font-bold text-slate-700">
                                 Dashboard
-                            </Link>
+                            </span>
+                        </DropdownItem>
+                        <DropdownItem as={Link} href="/login">
+                            <span className="w-ful h-full text-md font-bold text-slate-700">
+                                Register/Login
+                            </span>
                         </DropdownItem>
                         <DropdownItem>
-                            <Link className="text-md font-bold h-5 text-slate-700" href="/login">
-                                Register/Login
-                            </Link>
-                        </DropdownItem>
-                        <DropdownItem color="danger">
-                            <span className="text-md font-bold h-5 text-slate-700">
-                                Log Out
+                            <span className="w-ful h-full text-md font-bold text-slate-700">
+                                Logout
                             </span>
                         </DropdownItem>
                     </DropdownMenu>

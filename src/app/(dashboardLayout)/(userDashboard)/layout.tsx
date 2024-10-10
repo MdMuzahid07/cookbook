@@ -28,7 +28,7 @@ const UserDashboardLayout = ({ children }: { children: ReactNode }) => {
                     />
                     <div className="bg-slate-100">
                         <div
-                            className={`sm:px-16 px-6 ${isSidebarOpen ? "max-w-7xl" : "max-w-screen-2xl"
+                            className={`${isSidebarOpen ? "" : "max-w-screen-2xl"
                                 } min-h-screen w-full mx-auto `}
                         >
                             {children}

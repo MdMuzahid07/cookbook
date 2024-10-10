@@ -1,4 +1,8 @@
 "use client"
+
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 
@@ -14,7 +18,7 @@ const UserDashboardSidebar = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
             <div
                 className="relative p-8 w-full"
             >
-                <h4 className="text-2xl md:text-3xl lg:text-4xl font-extrabold">PlayTime Pro</h4>
+                <h4 className="text-2xl md:text-3xl lg:text-4xl font-extrabold">CookBook</h4>
 
                 <button
                     onClick={() => setIsSidebarOpen(false)}
@@ -37,7 +41,15 @@ const UserDashboardSidebar = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
                 </button>
 
                 <div className="mt-6 sm:mt-14 md:mt-16 border-t">
-
+                    <Button as={Link} href="/dashboard/my-profile" className="w-full mb-5 text-xl font-bold"  >
+                        Profile
+                    </Button>
+                    <Button as={Link} href="/dashboard/my-recipe" className="w-full mb-5 text-xl font-bold"  >
+                        Manage Recipe
+                    </Button>
+                    <Button as={Link} href="/dashboard/share-recipe" className="w-full mb-5 text-xl font-bold" >
+                        Share Recipe
+                    </Button>
                 </div>
             </div>
         </aside>

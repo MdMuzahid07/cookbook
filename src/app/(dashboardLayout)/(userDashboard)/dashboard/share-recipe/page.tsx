@@ -2,7 +2,7 @@ import React from 'react'
 
 const ShareRecipe = () => {
     return (
-        <div>ShareRecipe</div>
+        <div>Share Recipe</div>
     )
 }
 

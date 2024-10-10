@@ -49,7 +49,7 @@ const fakeData = {
     ],
 };
 
-export default function MyProfilePage() {
+const MyProfilePage = () => {
     const [activeTab, setActiveTab] = useState('recipes');
     const [isFollowing, setIsFollowing] = useState(fakeData.isFollowing);
 
@@ -87,24 +87,6 @@ export default function MyProfilePage() {
                         </div>
                     </section>
                     <section>
-                        <button
-                            onClick={handleFollow}
-                            className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
-                                ? 'bg-slate-950 text-white'
-                                : ' bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600'
-                                }`}
-                        >
-                            {isFollowing ? 'UnFollow' : 'Follow'}
-                        </button>
-                        <button
-                            onClick={handleFollow}
-                            className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
-                                ? 'bg-slate-950 text-white'
-                                : ' bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600'
-                                }`}
-                        >
-                            {isFollowing ? 'UnFollow' : 'Follow'}
-                        </button>
                         <button
                             onClick={handleFollow}
                             className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
@@ -209,4 +191,6 @@ export default function MyProfilePage() {
             </section>
         </section>
     );
-}
+};
+
+export default MyProfilePage;
