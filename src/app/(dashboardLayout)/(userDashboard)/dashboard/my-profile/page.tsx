@@ -1,7 +1,8 @@
 "use client"
 import RecipeCard from '@/app/(mainLayout)/components/recipe/RecipeCard';
-import { Avatar } from '@nextui-org/react';
+import { Avatar, Button } from '@nextui-org/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 // Fake data for demo
@@ -86,11 +87,12 @@ const MyProfilePageDashboard = () => {
                         >
                             Edit
                         </button>
-                        <button
+                        <Button as={Link}
+                            href="/dashboard/get-membership"
                             className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold bg-yellow-500 text-white `}
                         >
                             Get Membership
-                        </button>
+                        </Button>
                     </section>
                 </section>
 
