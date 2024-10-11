@@ -74,7 +74,7 @@ const ShareRecipe = () => {
         remove: removeInstruction,
     } = useFieldArray({
         control,
-        name: "instructions",
+        name: "instructions" as any,
     });
 
     // Managing dynamic ingredients

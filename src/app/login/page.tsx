@@ -1,7 +1,8 @@
 "use client"
 import { useUserLogin } from "@/hooks/auth.hook";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 interface TLoginData {
@@ -10,7 +11,10 @@ interface TLoginData {
 }
 
 const LoginPage = () => {
-    const { mutate: login, isPending } = useUserLogin();
+    const searchParams = useSearchParams();
+    const redirect = searchParams?.get("redirect");
+    const router = useRouter();
+    const { mutate: login, isPending, isSuccess } = useUserLogin();
 
     const [loginData, setLoginData] = useState<TLoginData>({
         email: "",
@@ -22,10 +26,19 @@ const LoginPage = () => {
         setLoginData({ ...loginData, [name]: value });
     };
 
-
     if (isPending) {
         toast.loading("working...", { id: "userSuccessfulLoginToastId" })
     }
+
+    useEffect(() => {
+        if (!isPending && isSuccess) {
+            if (redirect) {
+                router.push(redirect)
+            } else {
+                router.push("/")
+            }
+        }
+    }, [isPending, isSuccess, redirect, router]);
 
 
     const handleSubmit = (e: React.FormEvent) => {

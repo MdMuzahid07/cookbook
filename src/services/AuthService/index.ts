@@ -2,6 +2,7 @@
 "use server"
 
 import axiosInstance from "@/lib/AxiosInstance"
+import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
@@ -36,4 +37,25 @@ export const userLogin = async (userData: FieldValues) => {
     } catch (error: any) {
         throw new Error(error);
     }
+};
+
+
+export const getCurrentUser = async () => {
+    const accessToken = cookies().get("accessToken")?.value;
+
+    let decodedToken = null;
+
+    if (accessToken) {
+        decodedToken = await jwtDecode(accessToken);
+
+        return {
+            id: decodedToken?.id,
+            name: decodedToken?.name,
+            email: decodedToken?.email,
+            role: decodedToken?.role,
+            avatar: decodedToken?.avatar,
+        }
+    };
+
+    return decodedToken;
 };
