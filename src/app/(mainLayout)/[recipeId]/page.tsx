@@ -10,12 +10,10 @@ const RecipeDetailsPage = async ({ params: { recipeId } }: any) => {
     const data = await res.json();
     const recipe = data?.data;
 
-    console.log(recipe)
-
     return (
         <section className="bg-slate-100 md:bg-yellow-500">
 
-            <DetailsPageBanner />
+            <DetailsPageBanner recipe={recipe} />
 
             <RecipeDetails recipe={recipe} />
         </section>
