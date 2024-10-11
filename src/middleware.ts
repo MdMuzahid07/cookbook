@@ -34,18 +34,23 @@ export async function middleware(request: NextRequest) {
     }
 
 
-    if (user?.role === "admin" && pathname === "/admin-dashboard") {
+    if (user?.role === "admin" && pathname.match(/^\/admin-dashboard/)) {
         return NextResponse.next();
     }
 
 
-    if (user?.role === "user" && pathname === "/dashboard/my-profile") {
+    if (user?.role === "user" && pathname.match(/^\/dashboard/)) {
         return NextResponse.next();
     }
 
 
+    if (user?.role === "user" && pathname === "/profile") {
+        return NextResponse.next();
+    }
 
-
+    if (user?.role === "admin" && pathname === "/profile") {
+        return NextResponse.next();
+    }
 
     return NextResponse.redirect(new URL("/", request.url))
 }
@@ -56,6 +61,7 @@ export const config = {
         "/dashboard/:page*",
         "/admin-dashboard/:page*",
         "/login",
-        "/register"
+        "/register",
+        "/profile"
     ],
 }
