@@ -1,8 +1,17 @@
 "use client"
+import { logOut } from "@/services/AuthService";
 import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, NavbarContent, NavbarItem, Link, DropdownMenu, DropdownItem, DropdownTrigger, Avatar, Dropdown, Input } from "@nextui-org/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const MainNavbar = () => {
+    const router = useRouter();
+
+    const handleLogout = () => {
+        logOut();
+        router.push("/");
+    };
+
     const menuItems = [
         "Profile",
         "Dashboard",
@@ -113,7 +122,7 @@ const MainNavbar = () => {
                                 Register/Login
                             </span>
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={handleLogout}>
                             <span className="w-ful h-full text-md font-bold text-slate-700">
                                 Logout
                             </span>

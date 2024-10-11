@@ -39,6 +39,30 @@ export const userLogin = async (userData: FieldValues) => {
     }
 };
 
+export const resetPasswordRequest = async (userData: FieldValues) => {
+    try {
+        const { data } = await axiosInstance.post("/auth/reset-password", userData);
+
+        return data;
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
+
+export const resetPassword = async (resetPasswordData: any) => {
+    try {
+
+        const { password, token } = resetPasswordData;
+
+        const { data } = await axiosInstance.post(`/auth/reset-password/${token}`, { password });
+
+        return data;
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
+
+
 
 export const getCurrentUser = async () => {
     const accessToken = cookies().get("accessToken")?.value;
@@ -58,4 +82,10 @@ export const getCurrentUser = async () => {
     };
 
     return decodedToken;
+};
+
+
+export const logOut = () => {
+    cookies().delete("accessToken");
+    cookies().delete("refreshToken");
 };

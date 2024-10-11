@@ -1,21 +1,19 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getCurrentUser } from './services/AuthService';
-import path from 'path';
 
 
 const AuthRoutes = ["/login", "/register"];
 
-const ROLES = {
-    ADMIN: "admin",
-    USER: "user"
-};
+// const ROLES = {
+//     ADMIN: "admin",
+//     USER: "user"
+// };
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
-    console.log(pathname);
 
     const user = await getCurrentUser();
 

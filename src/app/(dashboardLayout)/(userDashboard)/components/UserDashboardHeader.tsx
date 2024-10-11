@@ -1,12 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import { logOut } from "@/services/AuthService";
 import { Avatar } from "@nextui-org/avatar";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/navbar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const UserDashboardHeader = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
+    const router = useRouter();
+
+    const handleLogout = () => {
+        logOut();
+        router.push("/");
+    };
 
     return (
         <Navbar maxWidth={`${isSidebarOpen ? "full" : "2xl"}`} className="bg-white border-b drop-shadow-md">
@@ -50,7 +58,7 @@ const UserDashboardHeader = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
                             <p className="font-semibold">zoey@example.com</p>
                         </DropdownItem>
                         <DropdownItem as={Link} href="/">Back Home</DropdownItem>
-                        <DropdownItem key="logout" color="danger">
+                        <DropdownItem onClick={handleLogout} key="logout" color="danger">
                             Log Out
                         </DropdownItem>
                     </DropdownMenu>

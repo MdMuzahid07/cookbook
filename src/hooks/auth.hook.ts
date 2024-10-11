@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { registerUser, userLogin } from "@/services/AuthService";
+import { registerUser, resetPassword, resetPasswordRequest, userLogin } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -34,6 +34,40 @@ export const useUserLogin = () => {
             },
             onError: (error) => {
                 toast.error(error.message, { id: "userSuccessfulLoginToastId" });
+            },
+        }
+    );
+};
+
+
+export const usePasswordResetRequest = () => {
+
+    return useMutation<any>(
+        {
+            mutationKey: ["RESET_PASSWORD_REQUEST"],
+            mutationFn: async (userData) => await resetPasswordRequest(userData as any),
+            onSuccess: () => {
+                toast.success("we send you a magic link, please check your email", { id: "userResetPassRequestToastId" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "userResetPassRequestToastId" });
+            },
+        }
+    );
+};
+
+
+export const useResetPassword = () => {
+
+    return useMutation<any>(
+        {
+            mutationKey: ["RESET_PASSWORD"],
+            mutationFn: async (resetPasswordData) => await resetPassword(resetPasswordData),
+            onSuccess: () => {
+                toast.success("congratulation, you recover your account by resetting password", { id: "userPasswordResetToastId" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "userPasswordResetToastId" });
             },
         }
     );
