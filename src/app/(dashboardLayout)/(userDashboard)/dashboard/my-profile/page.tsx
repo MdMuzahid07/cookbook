@@ -19,11 +19,6 @@ const MyProfilePageDashboard = () => {
     const { data: recipeData, error: recipeError, isLoading: isRecipeLoading } = useGetAllRecipe();
 
 
-    const formatDate = (dateString: any) => {
-        const options = { year: "numeric", month: "long", day: "numeric" };
-        return new Date(dateString).toLocaleDateString(undefined, options as any);
-    };
-
     if (isRecipeLoading) {
         toast.loading("Loading", { id: "recipe879855" })
     }
@@ -101,7 +96,7 @@ const MyProfilePageDashboard = () => {
                             <p className="mt-2 text-gray-700"><strong>Subscription:</strong> {userData?.membership ? "Premium Plan" : "Free Plan"}</p>
                             {userData?.membership && (
                                 <p className="mt-2 text-green-600">
-                                    <strong>Membership:</strong> {userData?.membership.type} (Expires on {formatDate(userData?.membership.expiresAt)})
+                                    <strong>Membership:</strong>  ({userData?.membership?.subscription} subscription)
                                 </p>
                             )}
                         </div>

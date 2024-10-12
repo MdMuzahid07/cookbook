@@ -1,9 +1,13 @@
-// pages/profile/[username].tsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { Avatar } from '@nextui-org/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import RecipeCard from '../components/recipe/RecipeCard';
+import { useGetUserById } from '@/hooks/auth.hook';
+import { useGetAllRecipe } from '@/hooks/recipe.hook';
+import { toast } from 'sonner';
+import { useUser } from '@/context/user.provider';
 
 // Fake data for demo
 const fakeData = {
@@ -52,10 +56,43 @@ const fakeData = {
 const MyProfilePage = () => {
     const [activeTab, setActiveTab] = useState('recipes');
     const [isFollowing, setIsFollowing] = useState(fakeData.isFollowing);
+    const { user } = useUser();
+    const { data, error, isLoading } = useGetUserById(user?.id);
+    const { data: recipeData, error: recipeError, isLoading: isRecipeLoading } = useGetAllRecipe();
+
+    if (isRecipeLoading) {
+        toast.loading("Loading", { id: "recipe879855" })
+    }
+
+    if (isLoading) {
+        toast.loading("Loading", { id: "getSingleUserByIdToast" })
+    }
+
+    if (error) {
+        toast.error(error.message, { id: "getSingleUserByIdToast" });
+    }
+
+    if (recipeError) {
+        toast.error(recipeError.message, { id: "recipe879855" });
+    }
+
+    if (data) {
+        toast.success("Success to get user", { id: "getSingleUserByIdToast" });
+    }
+
+    if (recipeData) {
+        toast.success("Success to get user", { id: "recipe879855" });
+    }
 
     const handleFollow = () => {
         setIsFollowing((prev) => !prev);
     };
+
+
+    const userData = data?.data;
+    const allRecipeData = recipeData?.data;
+
+    const allRecipeSharedByThisUser = allRecipeData?.filter((recipe: any) => recipe?.author?._id === user?.id);
 
 
     return (
@@ -64,7 +101,7 @@ const MyProfilePage = () => {
             <section className="h-56 bg-[url('https://res.cloudinary.com/dsdbqct3r/image/upload/v1728455725/6470_yvgrhg.jpg')] relative bg-cover bg-no-repeat bg-center">
                 <div className="max-w-7xl mx-auto">
                     <div className="absolute -bottom-16 pl-4">
-                        <Avatar src={fakeData.profilePicture} className="w-40 h-40 text-large ring-4 ring-white" />
+                        <Avatar src={userData?.avatar} className="w-40 h-40 text-large ring-4 ring-white" />
                     </div>
                 </div>
             </section>
@@ -74,15 +111,15 @@ const MyProfilePage = () => {
             <section className="mt-32 px-6 max-w-7xl mx-auto min-h-screen sm:bg-white sm:rounded-2xl sm:p-8 sm:shadow-lg">
                 <section className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <section>
-                        <h1 className="text-2xl font-bold">{fakeData.displayName}</h1>
-                        <p className="text-gray-600">@{fakeData.username}</p>
-                        <p className="mt-2">{fakeData.bio}</p>
+                        <h1 className="text-2xl font-bold">{userData?.name}</h1>
+                        <p className="text-gray-600">@{userData?.name}</p>
+                        <p className="mt-2">{userData?.bio}</p>
                         <div className="flex space-x-6 mt-4">
                             <span className="text-gray-700">
-                                <strong>{fakeData.followersCount}</strong> Followers
+                                <strong>{userData?.followers?.length}</strong> Followers
                             </span>
                             <span className="text-gray-700">
-                                <strong>{fakeData.followingCount}</strong> Following
+                                <strong>{userData?.following?.length}</strong> Following
                             </span>
                         </div>
                     </section>
@@ -90,11 +127,11 @@ const MyProfilePage = () => {
                         <button
                             onClick={handleFollow}
                             className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
-                                ? 'bg-slate-950 text-white'
-                                : ' bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600'
+                                ? "bg-slate-950 text-white"
+                                : " bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600"
                                 }`}
                         >
-                            {isFollowing ? 'UnFollow' : 'Follow'}
+                            {isFollowing ? "UnFollow" : "Follow"}
                         </button>
                     </section>
                 </section>
@@ -103,29 +140,29 @@ const MyProfilePage = () => {
                 <div className="mt-8 border-b border-gray-300">
                     <nav className="-mb-px flex space-x-8">
                         <button
-                            className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'recipes'
-                                ? 'border-yellow-500 text-yellow-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                            className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm ${activeTab === "recipes"
+                                ? "border-yellow-500 text-yellow-600"
+                                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                                 }`}
-                            onClick={() => setActiveTab('recipes')}
+                            onClick={() => setActiveTab("recipes")}
                         >
                             Recipes
                         </button>
                         <button
-                            className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'followers'
-                                ? 'border-blue-500 text-blue-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                            className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm ${activeTab === "followers"
+                                ? "border-blue-500 text-blue-600"
+                                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                                 }`}
-                            onClick={() => setActiveTab('followers')}
+                            onClick={() => setActiveTab("followers")}
                         >
                             Followers
                         </button>
                         <button
-                            className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'following'
-                                ? 'border-blue-500 text-blue-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                            className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm ${activeTab === "following"
+                                ? "border-blue-500 text-blue-600"
+                                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                                 }`}
-                            onClick={() => setActiveTab('following')}
+                            onClick={() => setActiveTab("following")}
                         >
                             Following
                         </button>
@@ -136,14 +173,14 @@ const MyProfilePage = () => {
                 <div className="mt-6">
                     {activeTab === "recipes" && (
                         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-                            {fakeData.recipes.map((recipe, index) => (
+                            {allRecipeSharedByThisUser?.map((recipe: any, index: any) => (
                                 <RecipeCard key={index} recipe={recipe} />
                             ))}
                         </div>
                     )}
                     {activeTab === "followers" && (
                         <div className="space-y-4 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {fakeData.followers.map((follower) => (
+                            {userData?.followers?.map((follower: any) => (
                                 <div
                                     key={follower.id}
                                     className="flex items-center bg-slate-100 p-4 rounded-2xl shadow-md"
@@ -165,23 +202,23 @@ const MyProfilePage = () => {
                     )}
                     {activeTab === "following" && (
                         <div className="space-y-4">
-                            {fakeData.following.map((followed) => (
+                            {userData?.following?.map((following: any) => (
                                 <div
-                                    key={followed.id}
+                                    key={following?.id}
                                     className="flex items-center bg-white p-4 rounded-2xl shadow-md"
                                 >
                                     <Image
-                                        src={followed.profilePicture}
-                                        alt={followed.username}
+                                        src={following?.profilePicture}
+                                        alt={following?.username}
                                         width={48}
                                         height={48}
                                         className="rounded-full object-cover"
                                     />
                                     <div className="ml-4">
                                         <h4 className="text-lg font-semibold">
-                                            {followed.displayName}
+                                            {following?.displayName}
                                         </h4>
-                                        <p className="text-gray-600">@{followed.username}</p>
+                                        <p className="text-gray-600">@{following?.username}</p>
                                     </div>
                                 </div>
                             ))}

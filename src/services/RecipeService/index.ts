@@ -31,6 +31,7 @@ export const updateARecipe = async ({ id, recipeData }: any) => {
 
         const { data } = await axiosInstance.patch(`/recipe/${id}`, { recipeData });
 
+        revalidateTag("recipes")
 
         return data;
 
@@ -62,6 +63,7 @@ export const getAllRecipe = async () => {
     try {
 
         const { data } = await axiosInstance.get(`/recipe`);
+
 
         return data;
     } catch (error: any) {
