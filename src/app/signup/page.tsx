@@ -2,7 +2,8 @@
 "use client"
 import { useUserRegistration } from "@/hooks/auth.hook";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export interface TRegister {
@@ -14,8 +15,8 @@ export interface TRegister {
 }
 
 const RegisterPage = () => {
-    const { mutate: registration, isPending } = useUserRegistration();
-
+    const { mutate: registration, isPending, isSuccess } = useUserRegistration();
+    const router = useRouter();
     const [formData, setFormData] = useState<TRegister>({
         name: "",
         email: "",
@@ -41,6 +42,11 @@ const RegisterPage = () => {
         toast.loading("working...", { id: "userRegisterToastId" })
     }
 
+    useEffect(() => {
+        if (!isPending && isSuccess) {
+            router.push("/")
+        }
+    }, [isPending, router, isSuccess])
 
     const handleRegistration = (e: React.FormEvent) => {
         e.preventDefault();

@@ -6,6 +6,7 @@ import RecipeCard from "@/app/(mainLayout)/components/recipe/RecipeCard";
 import { Avatar, Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useUser } from "@/content/user.provider";
 
 // Sample User Data
 const userData = {
@@ -127,6 +128,7 @@ const userData = {
 
 const MyProfilePageDashboard = () => {
     const [activeTab, setActiveTab] = useState("recipes");
+    const { user } = useUser();
 
 
     const formatDate = (dateString: any) => {
@@ -152,7 +154,7 @@ const MyProfilePageDashboard = () => {
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex justify-center -mb-36 transform -translate-y-1/2">
                         <Avatar
-                            src={userData?.avatar}
+                            src={user?.avatar}
                             alt={userData?.name}
                             className=" border-4 w-40 md:w-56 h-40 md:h-56 border-white"
                         />

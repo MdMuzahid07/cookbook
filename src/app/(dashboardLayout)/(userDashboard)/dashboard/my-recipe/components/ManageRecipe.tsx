@@ -14,7 +14,7 @@ const ManageRecipeComponent = ({ recipes }: any) => {
         toast.loading("deleting...", { id: "recipeDeleteNotificationToast" })
     }
 
-    const handleDelete = (id: string) => {
+    const handleDelete = (id: any) => {
         const proceed = window.confirm("Delete Recipe?");
         if (proceed) {
             deleteRecipe(id as any);
@@ -36,21 +36,21 @@ const ManageRecipeComponent = ({ recipes }: any) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {recipes.map((recipe, index) => (
-                            <tr key={recipe._id} className="border-b hover:bg-gray-100">
+                        {recipes.map((recipe: any, index: any) => (
+                            <tr key={recipe?._id} className="border-b hover:bg-gray-100">
                                 <td className="py-8 px-6">{index + 1}</td>
                                 <td className="py-8 px-6">
                                     <Image
                                         src={recipe?.images}
-                                        alt={recipe.title}
+                                        alt={recipe?.title}
                                         width={150}
                                         height={100}
                                         className="object-cover rounded-2xl"
                                     />
                                 </td>
-                                <td className="py-8 px-6">{recipe.title}</td>
-                                <td className="py-8 px-6">{recipe.description}</td>
-                                <td className="py-8 px-6">{recipe.category}</td>
+                                <td className="py-8 px-6">{recipe?.title}</td>
+                                <td className="py-8 px-6">{recipe?.description}</td>
+                                <td className="py-8 px-6">{recipe?.category}</td>
                                 <td className="py-8 px-6">
                                     <section className="flex items-center space-x-4">
                                         <button className="bg-slate-300 rounded-full w-10 h-10 flex justify-center items-center hover:bg-yellow-500 hover:text-white">

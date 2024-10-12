@@ -9,7 +9,11 @@ import { FieldValues } from "react-hook-form";
 
 export const registerUser = async (userData: FieldValues) => {
     try {
-        const { data } = await axiosInstance.post("/user/register", userData);
+        const { data } = await axiosInstance.post("/user/register", userData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
 
         if (data.success) {
             cookies().set("accessToken", data?.data?.accessToken);
