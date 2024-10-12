@@ -6,7 +6,9 @@ import RecipeDetails from '../components/recipe/RecipeDetails';
 
 const RecipeDetailsPage = async ({ params: { recipeId } }: any) => {
 
-    const res = await fetch(`${envConfig.baseApi}/recipe/${recipeId}`);
+    const res = await fetch(`${envConfig.baseApi}/recipe/${recipeId}`, {
+        cache: "no-store"
+    });
     const data = await res.json();
     const recipe = data?.data;
 

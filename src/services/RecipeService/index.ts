@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
 import axiosInstance from "@/lib/AxiosInstance";
+import { revalidateTag } from "next/cache";
 import { FieldValues } from "react-hook-form";
 
 
@@ -11,6 +12,11 @@ export const createRecipe = async (userData: FieldValues) => {
                 'Content-Type': 'multipart/form-data'
             }
         });
+
+
+        revalidateTag("recipes")
+
+
         return data;
 
     } catch (error: any) {
@@ -20,10 +26,12 @@ export const createRecipe = async (userData: FieldValues) => {
 
 export const deleteARecipe = async (id: any) => {
     try {
-        console.log(id, "from delete a recipe, Recipe Service ===============");
-
-
         const { data } = await axiosInstance.delete(`/recipe/${id}`);
+
+
+        revalidateTag("recipes")
+
+
         return data;
 
     } catch (error: any) {

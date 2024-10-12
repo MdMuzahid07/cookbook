@@ -48,6 +48,7 @@ const AddRecipeComponent = ({ user }: any) => {
     const {
         register,
         control,
+        reset,
         handleSubmit,
         formState: { errors },
         setValue,
@@ -140,7 +141,7 @@ const AddRecipeComponent = ({ user }: any) => {
         addRecipe(recipeFormData)
 
 
-        // reset();
+        reset();
     };
     return (
         <section className="bg-yellow-500 py-20">
@@ -331,7 +332,7 @@ const AddRecipeComponent = ({ user }: any) => {
 
 
                         <section className="pb-4">
-                            <label className="block text-sm font-medium text-gray-700">Tags (comma separated)</label>
+                            <label className="block text-sm font-medium text-gray-700">Tags</label>
                             {tagFields.map((field, index) => (
                                 <section key={field.id} className="flex items-center space-x-2 mt-2">
                                     <input

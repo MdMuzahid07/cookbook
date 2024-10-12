@@ -6,7 +6,11 @@ import Recipe from './components/recipe/Recipe';
 
 
 const RecipeFeed = async () => {
-    const res = await fetch(`${envConfig.baseApi}/recipe`);
+    const res = await fetch(`${envConfig.baseApi}/recipe`, {
+        next: {
+            tags: ["recipes"]
+        }
+    });
     const data = await res.json();
     const recipes = data?.data;
 
