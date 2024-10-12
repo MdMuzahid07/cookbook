@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
 import { getCurrentUser } from "@/services/AuthService";
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 
@@ -28,7 +29,6 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         handleUser();
     }, [isLoading]);
-
 
 
     return (

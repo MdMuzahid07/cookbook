@@ -1,9 +1,9 @@
-import { getCurrentUser } from "@/services/AuthService"
+"use client"
 import AddRecipeComponent from "./components/AddRecipe";
+import { useUser } from "@/context/user.provider";
 
-const AddRecipe = async () => {
-    const user = await getCurrentUser();
-
+const AddRecipe = () => {
+    const { user } = useUser();
 
     return (
         <>

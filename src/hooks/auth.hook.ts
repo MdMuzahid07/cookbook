@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { registerUser, resetPassword, resetPasswordRequest, userLogin } from "@/services/AuthService";
+import { registerUser, resetPassword, resetPasswordRequest, updateUser, userLogin } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -22,6 +22,22 @@ export const useUserRegistration = () => {
 
 };
 
+export const useUserProfileUpdate = () => {
+
+    return useMutation<any, Error, FieldValues>(
+        {
+            mutationKey: ["USER_PROFILE_UPDATE"],
+            mutationFn: async (userData) => await updateUser(userData),
+            onSuccess: () => {
+                toast.success("user profile info updated successfully", { id: "userProfileUpdateToastId" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "userProfileUpdateToastId" });
+            },
+        }
+    );
+
+};
 
 export const useUserLogin = () => {
 

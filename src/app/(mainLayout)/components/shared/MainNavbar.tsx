@@ -1,5 +1,5 @@
 "use client"
-import { useUser } from "@/content/user.provider";
+import { useUser } from "@/context/user.provider";
 import { logOut } from "@/services/AuthService";
 import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, NavbarContent, NavbarItem, Link, DropdownMenu, DropdownItem, DropdownTrigger, Avatar, Dropdown, Input } from "@nextui-org/react";
 import Image from "next/image";

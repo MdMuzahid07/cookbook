@@ -1,5 +1,5 @@
 "use client"
-import UserProvider from "@/content/user.provider";
+import UserProvider from "@/context/user.provider";
 import { NextUIProvider } from "@nextui-org/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner"

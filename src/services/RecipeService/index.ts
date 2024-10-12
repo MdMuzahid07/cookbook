@@ -24,6 +24,22 @@ export const createRecipe = async (userData: FieldValues) => {
     }
 };
 
+
+export const updateARecipe = async ({ id, recipeData }: any) => {
+    try {
+
+
+        const { data } = await axiosInstance.patch(`/recipe/${id}`, { recipeData });
+
+
+        return data;
+
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
+
+
 export const deleteARecipe = async (id: any) => {
     try {
         const { data } = await axiosInstance.delete(`/recipe/${id}`);

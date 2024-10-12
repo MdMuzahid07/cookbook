@@ -6,7 +6,7 @@ import RecipeCard from "@/app/(mainLayout)/components/recipe/RecipeCard";
 import { Avatar, Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useUser } from "@/content/user.provider";
+import { useUser } from "@/context/user.provider";
 
 // Sample User Data
 const userData = {

@@ -28,6 +28,29 @@ export const registerUser = async (userData: FieldValues) => {
 }
 
 
+export const updateUser = async (userData: FieldValues) => {
+    try {
+
+        const { data } = await axiosInstance.patch(`/user/update/${userData?.id}`, userData?.updateData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+
+        if (data.success) {
+            cookies().set("accessToken", data?.data?.accessToken);
+            cookies().set("refreshToken", data?.data?.refreshToken);
+        }
+
+        return data;
+
+    } catch (error: any) {
+        throw new Error(error);
+    }
+}
+
+
+
 export const userLogin = async (userData: FieldValues) => {
     try {
         const { data } = await axiosInstance.post("/auth/login", userData);
