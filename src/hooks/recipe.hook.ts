@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createRecipe, deleteARecipe, updateARecipe } from "@/services/RecipeService";
-import { useMutation } from "@tanstack/react-query";
+import { createRecipe, deleteARecipe, getAllRecipe, updateARecipe } from "@/services/RecipeService";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -58,3 +58,13 @@ export const useDeleteRecipe = () => {
     );
 
 };
+
+
+
+export const useGetAllRecipe = () => {
+    return useQuery(
+        { queryKey: ["GET_ALL_RECIPE"], queryFn: () => getAllRecipe() }
+
+    );
+};
+

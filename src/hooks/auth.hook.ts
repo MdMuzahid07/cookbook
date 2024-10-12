@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { registerUser, resetPassword, resetPasswordRequest, updateUser, userLogin } from "@/services/AuthService";
-import { useMutation } from "@tanstack/react-query";
+import { getSingleUserById, registerUser, resetPassword, resetPasswordRequest, updateUser, userLogin } from "@/services/AuthService";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -86,5 +86,14 @@ export const useResetPassword = () => {
                 toast.error(error.message, { id: "userPasswordResetToastId" });
             },
         }
+    );
+};
+
+
+
+export const useGetUserById = (id: string) => {
+    return useQuery(
+        { queryKey: ["GET_USER", id], queryFn: () => getSingleUserById(id) }
+
     );
 };

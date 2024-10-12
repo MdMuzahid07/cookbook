@@ -54,3 +54,17 @@ export const deleteARecipe = async (id: any) => {
         throw new Error(error);
     }
 };
+
+
+
+
+export const getAllRecipe = async () => {
+    try {
+
+        const { data } = await axiosInstance.get(`/recipe`);
+
+        return data;
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};

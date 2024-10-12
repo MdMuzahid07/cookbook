@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import axiosInstance from "@/lib/AxiosInstance"
 import { jwtDecode } from "jwt-decode";
@@ -89,6 +89,18 @@ export const resetPassword = async (resetPasswordData: any) => {
     }
 };
 
+
+
+export const getSingleUserById = async (id: any) => {
+    try {
+
+        const { data } = await axiosInstance.get(`/user/${id}`);
+
+        return data;
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
 
 
 export const getCurrentUser = async () => {

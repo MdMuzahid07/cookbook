@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useUser } from "@/context/user.provider";
 import { useUpdateRecipe } from "@/hooks/recipe.hook";
 import { useParams } from "next/navigation";
 import { useFieldArray, useForm, SubmitHandler } from "react-hook-form";

@@ -7,128 +7,16 @@ import { Avatar, Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "@/context/user.provider";
+import { useGetUserById } from "@/hooks/auth.hook";
+import { toast } from "sonner";
+import { useGetAllRecipe } from "@/hooks/recipe.hook";
 
-// Sample User Data
-const userData = {
-    "_id": "670192c7be62e566aca0ebbd",
-    "name": "Md. Muzahid",
-    "email": "mdmuzahid.dev@gmail.com",
-    "password": "$2b$12$U6wWZQtUwGliuzvuKe5kYuhtCe9VLcqpFLawe8hqxdaMCvgTuW67.",
-    "bio": "MERN Stack Developer",
-    "role": "admin",
-    "avatar": "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-    "isDeleted": false,
-    "followers": [
-        {
-            id: 1,
-            username: "foodlover",
-            displayName: "Food Lover",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "foodlover",
-            displayName: "Food Lover",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "foodlover",
-            displayName: "Food Lover",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "foodlover",
-            displayName: "Food Lover",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "foodlover",
-            displayName: "Food Lover",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "foodlover",
-            displayName: "Food Lover",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "foodlover",
-            displayName: "Food Lover",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-    ],
-    "following": [
-        {
-            id: 1,
-            username: "bakerpro",
-            displayName: "Baker Pro",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "bakerpro",
-            displayName: "Baker Pro",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "bakerpro",
-            displayName: "Baker Pro",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "bakerpro",
-            displayName: "Baker Pro",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "bakerpro",
-            displayName: "Baker Pro",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-        {
-            id: 1,
-            username: "bakerpro",
-            displayName: "Baker Pro",
-            profilePicture: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-        },
-    ],
-    "membership": {
-        type: "Premium",
-        expiresAt: "2025-10-11T00:00:00.000Z"
-    },
-    "createdAt": "2024-10-05T19:25:59.096Z",
-    "updatedAt": "2024-10-06T17:20:05.598Z",
-    "__v": 0,
-    "isBlocked": false,
-    "recipes": [
-        {
-            id: 1,
-            title: "Spaghetti Carbonara",
-            description: "Classic Italian pasta dish.",
-            image: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-            createdAt: "2h",
-        },
-        {
-            id: 2,
-            title: "Chocolate Chip Cookies",
-            description: "Crispy and chewy cookies.",
-            image: "https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg",
-            createdAt: "1d",
-        },
-    ],
-};
 
 const MyProfilePageDashboard = () => {
     const [activeTab, setActiveTab] = useState("recipes");
     const { user } = useUser();
+    const { data, error, isLoading } = useGetUserById(user?.id);
+    const { data: recipeData, error: recipeError, isLoading: isRecipeLoading } = useGetAllRecipe();
 
 
     const formatDate = (dateString: any) => {
@@ -136,7 +24,46 @@ const MyProfilePageDashboard = () => {
         return new Date(dateString).toLocaleDateString(undefined, options as any);
     };
 
+    if (isRecipeLoading) {
+        toast.loading("Loading", { id: "recipe879855" })
+    }
 
+    if (isLoading) {
+        toast.loading("Loading", { id: "getSingleUserByIdToast" })
+    }
+
+    if (error) {
+        toast.error(error.message, { id: "getSingleUserByIdToast" });
+    }
+
+    if (recipeError) {
+        toast.error(recipeError.message, { id: "recipe879855" });
+    }
+
+    if (data) {
+        toast.success("Success to get user", { id: "getSingleUserByIdToast" });
+    }
+
+    if (recipeData) {
+        toast.success("Success to get user", { id: "recipe879855" });
+    }
+
+
+
+    const userData = data?.data;
+    const allRecipeData = recipeData?.data;
+
+    const allRecipeSharedByThisUser = allRecipeData?.filter((recipe: any) => recipe?.author?._id === user?.id);
+
+    console.log({
+        allRecipeSharedByThisUser
+    }, "o+++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
+
+    // console.log(userData)
+
+
+    // console.log(allRecipeData, "recipeData ======================")
 
 
     return (
@@ -167,9 +94,9 @@ const MyProfilePageDashboard = () => {
                 <div className="bg-white shadow-lg rounded-2xl min-h-screen p-6 sm:p-8">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div>
-                            <h1 className="text-2xl font-bold">{userData.name}</h1>
-                            <p className="text-gray-600">@{userData.email.split("@")[0]}</p>
-                            <p className="mt-2 text-gray-700">{userData.bio}</p>
+                            <h1 className="text-2xl font-bold">{userData?.name}</h1>
+                            <p className="text-gray-600">@{userData?.email?.split("@")[0]}</p>
+                            <p className="mt-2 text-gray-700">{userData?.bio}</p>
                             <p className="mt-2 text-gray-700"><strong>Role:</strong> {userData?.role}</p>
                             {userData?.membership && (
                                 <p className="mt-2 text-green-600">
@@ -200,11 +127,11 @@ const MyProfilePageDashboard = () => {
                     {/* Followers and Following */}
                     <div className="mt-6 flex space-x-8">
                         <div>
-                            <span className="text-xl font-semibold">{userData.followers?.length}</span>
+                            <span className="text-xl font-semibold">{userData?.followers?.length}</span>
                             <span className="text-gray-600 ml-2">Followers</span>
                         </div>
                         <div>
-                            <span className="text-xl font-semibold">{userData.following?.length}</span>
+                            <span className="text-xl font-semibold">{userData?.following?.length}</span>
                             <span className="text-gray-600 ml-2">Following</span>
                         </div>
                         {userData?.isBlocked && (
@@ -256,14 +183,14 @@ const MyProfilePageDashboard = () => {
                     <div className="mt-6">
                         {activeTab === "recipes" && (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {userData?.recipes.map((recipe) => (
+                                {allRecipeSharedByThisUser?.map((recipe: any) => (
                                     <RecipeCard key={recipe.id} recipe={recipe} />
                                 ))}
                             </div>
                         )}
                         {activeTab === "followers" && (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {userData?.followers?.map((follower) => (
+                                {userData?.followers?.map((follower: any) => (
                                     <div
                                         key={follower?.id}
                                         className="flex items-center bg-slate-100 p-4 rounded-xl shadow-md"
@@ -284,7 +211,7 @@ const MyProfilePageDashboard = () => {
                         )}
                         {activeTab === "following" && (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {userData?.following?.map((followed) => (
+                                {userData?.following?.map((followed: any) => (
                                     <div
                                         key={followed?.id}
                                         className="flex items-center bg-slate-100 p-4 rounded-xl shadow-md"
@@ -312,3 +239,26 @@ const MyProfilePageDashboard = () => {
 };
 
 export default MyProfilePageDashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
