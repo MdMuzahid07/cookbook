@@ -1,4 +1,5 @@
 "use client"
+import { useUser } from "@/content/user.provider";
 import { logOut } from "@/services/AuthService";
 import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, NavbarContent, NavbarItem, Link, DropdownMenu, DropdownItem, DropdownTrigger, Avatar, Dropdown, Input } from "@nextui-org/react";
 import Image from "next/image";
@@ -15,9 +16,11 @@ const menuItems = [
 
 const MainNavbar = () => {
     const router = useRouter();
+    const { user, setIsLoading: userLoading } = useUser();
 
     const handleLogout = () => {
         logOut();
+        userLoading(true);
         router.push("/");
     };
 
@@ -94,15 +97,21 @@ const MainNavbar = () => {
                             as="button"
                             className="transition-transform"
                             color="secondary"
-                            name="Jason Hughes"
+                            name={user ? user?.name : "N/A"}
                             size="sm"
-                            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            src={user ? user?.avatar : ""}
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
-                        <DropdownItem key="profile" className="h-14 gap-2">
-                            <p className="font-semibold">Signed in as</p>
-                            <p className="font-semibold">zoey@example.com</p>
+                        <DropdownItem key="profile" className={`h-14 gap-2 ${!user ? "hidden" : "flex"}`}>
+                            <p className="font-semibold">
+                                {
+                                    user && "Signed in as"
+                                }
+                            </p>
+                            <p className="font-semibold">{
+                                user ? user?.email : ""
+                            }</p>
                         </DropdownItem>
                         <DropdownItem as={Link} href="/profile">
                             <span className="w-ful h-full text-md font-bold text-slate-700">

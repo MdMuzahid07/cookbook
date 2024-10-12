@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import { useUser } from "@/content/user.provider";
 import { logOut } from "@/services/AuthService";
 import { Avatar } from "@nextui-org/avatar";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
@@ -10,9 +11,10 @@ import { useRouter } from "next/navigation";
 
 const UserDashboardHeader = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
     const router = useRouter();
-
+    const { user, setIsLoading: userLoading } = useUser();
     const handleLogout = () => {
         logOut();
+        userLoading(true);
         router.push("/");
     };
 
@@ -36,7 +38,7 @@ const UserDashboardHeader = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
             </NavbarBrand>
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <h1 className="text-xl">Hello John</h1>
+                <h1 className="text-xl">{user?.name}</h1>
             </NavbarContent>
 
             <NavbarContent as="div" justify="end">
@@ -47,15 +49,15 @@ const UserDashboardHeader = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
                             as="button"
                             className="transition-transform"
                             color="secondary"
-                            name="Jason Hughes"
+                            name={user?.name}
                             size="sm"
-                            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            src={user?.avatar}
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
                         <DropdownItem key="profile" className="h-14 gap-2">
                             <p className="font-semibold">Signed in as</p>
-                            <p className="font-semibold">zoey@example.com</p>
+                            <p className="font-semibold">{user?.email}</p>
                         </DropdownItem>
                         <DropdownItem as={Link} href="/">Back Home</DropdownItem>
                         <DropdownItem onClick={handleLogout} key="logout" color="danger">

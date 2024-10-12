@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createRecipe } from "@/services/RecipeService";
+import { createRecipe, deleteARecipe } from "@/services/RecipeService";
 import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -16,6 +16,25 @@ export const useCreateRecipe = () => {
             },
             onError: (error: any) => {
                 toast.error(error.message, { id: "recipeCreateNotificationToast" });
+            },
+        }
+    );
+
+};
+
+
+
+export const useDeleteRecipe = () => {
+
+    return useMutation<any>(
+        {
+            mutationKey: ["DELETE_RECIPE"],
+            mutationFn: async (id) => await deleteARecipe(id),
+            onSuccess: () => {
+                toast.success("recipe deleted successfully", { id: "recipeDeleteNotificationToast" });
+            },
+            onError: (error: any) => {
+                toast.error(error.message, { id: "recipeDeleteNotificationToast" });
             },
         }
     );

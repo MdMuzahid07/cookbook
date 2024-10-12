@@ -7,7 +7,16 @@ import { FieldValues } from "react-hook-form";
 export const createRecipe = async (userData: FieldValues) => {
     try {
         const { data } = await axiosInstance.post("/recipe/create-recipe", userData);
-        console.log(data, "from createReciep Recipe service ")
+        return data;
+
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
+
+export const deleteARecipe = async (id: any) => {
+    try {
+        const { data } = await axiosInstance.delete(`/recipe/:${id}`);
         return data;
 
     } catch (error: any) {

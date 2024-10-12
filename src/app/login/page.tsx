@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
+import { useUser } from "@/content/user.provider";
 import { usePasswordResetRequest, useUserLogin } from "@/hooks/auth.hook";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
@@ -18,6 +19,7 @@ const LoginPage = () => {
     const searchParams = useSearchParams();
     const redirect = searchParams?.get("redirect");
     const router = useRouter();
+    const { setIsLoading: userLoading } = useUser();
     const { mutate: login, isPending, isSuccess } = useUserLogin();
     const { mutate: resetPassRequest, isPending: isReqPending } = usePasswordResetRequest()
 
@@ -54,6 +56,7 @@ const LoginPage = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         login(loginData);
+        userLoading(true)
     };
 
 
