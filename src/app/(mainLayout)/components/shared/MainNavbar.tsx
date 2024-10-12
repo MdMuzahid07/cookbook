@@ -4,6 +4,15 @@ import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Navb
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+
+const menuItems = [
+    { title: "Recipe Feed", to: "/" },
+    { title: "About Us", to: "/about" },
+    { title: "Contact Us", to: "/contact" },
+];
+
+
+
 const MainNavbar = () => {
     const router = useRouter();
 
@@ -12,18 +21,6 @@ const MainNavbar = () => {
         router.push("/");
     };
 
-    const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-        "Analytics",
-        "System",
-        "Deployments",
-        "My Settings",
-        "Team Settings",
-        "Help & Feedback",
-        "Log Out",
-    ];
 
     return (
         <Navbar
@@ -85,7 +82,7 @@ const MainNavbar = () => {
                     size="sm"
                     startContent={
                         <svg className="w-7 h-7" data-slot="icon" fill="none" strokeWidth="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path stroke-linecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
                         </svg>
                     }
                     type="search"
@@ -131,18 +128,15 @@ const MainNavbar = () => {
                 </Dropdown>
             </NavbarContent>
 
-            <NavbarMenu className="text-white">
+            <NavbarMenu className="text-white pt-8">
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
-                            className="w-full"
-                            color={
-                                index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
-                            }
-                            href="#"
+                            className="w-full text-white font-bold my-2"
+                            href={item?.to}
                             size="lg"
                         >
-                            {item}
+                            {item?.title}
                         </Link>
                     </NavbarMenuItem>
                 ))}
