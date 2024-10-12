@@ -7,7 +7,6 @@ export const getMembership = async (userData: any) => {
     try {
         const { data } = await axiosInstance.post("/subscription/create-subscription", userData);
 
-
         return data;
 
     } catch (error: any) {

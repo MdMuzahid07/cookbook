@@ -2,14 +2,16 @@
 "use client"
 import { useUser } from "@/context/user.provider";
 import { useGetPremiumSubscription } from "@/hooks/membership.hook";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const GetMembership = () => {
     const [selectedOption, setSelectedOption] = useState("");
+    const router = useRouter();
     const [price, setPrice] = useState(0);
     const { user } = useUser();
-    const { mutate: subscribePremium, isPending } = useGetPremiumSubscription();
+    const { mutate: subscribePremium, isPending, isSuccess } = useGetPremiumSubscription();
 
     const handleSelectChange = (e: any) => {
         const value = e.target.value;
@@ -37,6 +39,13 @@ const GetMembership = () => {
     if (isPending) {
         toast.loading("working...", { id: "premiumMembership2452453" });
     }
+
+
+    useEffect(() => {
+        if (!isPending && isSuccess) {
+            router.push("/dashboard/my-profile")
+        }
+    }, [isPending, isSuccess, router]);
 
 
     const handleSubmit = () => {
