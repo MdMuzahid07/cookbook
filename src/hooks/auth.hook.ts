@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getSingleUserById, registerUser, resetPassword, resetPasswordRequest, updateUser, userLogin } from "@/services/AuthService";
+import { followUser, getSingleUserById, registerUser, resetPassword, resetPasswordRequest, unFollowUser, updateUser, userLogin } from "@/services/AuthService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -96,4 +96,44 @@ export const useGetUserById = (id: string) => {
         { queryKey: ["GET_USER", id], queryFn: () => getSingleUserById(id) }
 
     );
+};
+
+
+
+
+// user follow unFollow 
+
+export const useFollowUser = () => {
+
+    return useMutation<any, Error, FieldValues>(
+        {
+            mutationKey: ["USER_REGISTRATION"],
+            mutationFn: async (id) => await followUser(id),
+            onSuccess: () => {
+                toast.success("user followed successfully", { id: "userFollowToastId" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "userFollowToastId" });
+            },
+        }
+    );
+
+};
+
+
+export const useUnFollowUser = () => {
+
+    return useMutation<any, Error, FieldValues>(
+        {
+            mutationKey: ["USER_REGISTRATION"],
+            mutationFn: async (id) => await unFollowUser(id),
+            onSuccess: () => {
+                toast.success("user un followed successfully", { id: "userUnFollowToastId" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "userUnFollowToastId" });
+            },
+        }
+    );
+
 };

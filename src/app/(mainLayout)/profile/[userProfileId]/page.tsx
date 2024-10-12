@@ -3,61 +3,20 @@
 import { Avatar } from '@nextui-org/react';
 import Image from 'next/image';
 import { useState } from 'react';
-import RecipeCard from '../components/recipe/RecipeCard';
-import { useGetUserById } from '@/hooks/auth.hook';
+import RecipeCard from '../../components/recipe/RecipeCard';
+import { useFollowUser, useGetUserById, useUnFollowUser } from '@/hooks/auth.hook';
 import { useGetAllRecipe } from '@/hooks/recipe.hook';
 import { toast } from 'sonner';
-import { useUser } from '@/context/user.provider';
 
-// Fake data for demo
-const fakeData = {
-    username: 'ChefMaster',
-    displayName: 'Chef Master',
-    profilePicture: 'https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg', // Store in public folder
-    coverPhoto: 'https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg',       // Store in public folder
-    bio: 'Passionate about creating delicious recipes! 🍳🍰🍲',
-    followersCount: 1200,
-    followingCount: 300,
-    isFollowing: false,
-    recipes: [
-        {
-            id: 1,
-            title: 'Spaghetti Carbonara',
-            description: 'Classic Italian pasta dish.',
-            image: 'https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg',      // Store in public folder
-            createdAt: '2h',
-        },
-        {
-            id: 2,
-            title: 'Chocolate Chip Cookies',
-            description: 'Crispy and chewy cookies.',
-            image: 'https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg',
-            createdAt: '1d',
-        },
-    ],
-    followers: [
-        {
-            id: 1,
-            username: 'foodlover',
-            displayName: 'Food Lover',
-            profilePicture: 'https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg',
-        },
-    ],
-    following: [
-        {
-            id: 1,
-            username: 'bakerpro',
-            displayName: 'Baker Pro',
-            profilePicture: 'https://res.cloudinary.com/dsdbqct3r/image/upload/v1728239123/m9jrhijxe1mjyocjlkwm.jpg',
-        },
-    ],
-};
 
-const MyProfilePage = () => {
+
+const MyProfilePage = ({ params }: any) => {
     const [activeTab, setActiveTab] = useState('recipes');
-    const [isFollowing, setIsFollowing] = useState(fakeData.isFollowing);
-    const { user } = useUser();
-    const { data, error, isLoading } = useGetUserById(user?.id);
+    const [isFollowing, setIsFollowing] = useState(false);
+    const profileUserId = params?.userProfileId;
+    const { data, error, isLoading } = useGetUserById(profileUserId);
+    const { mutate: follow, isPending: isFollowPending } = useFollowUser();
+    const { mutate: unFollow, isPending: isUnFollowPending } = useUnFollowUser();
     const { data: recipeData, error: recipeError, isLoading: isRecipeLoading } = useGetAllRecipe();
 
     if (isRecipeLoading) {
@@ -84,15 +43,27 @@ const MyProfilePage = () => {
         toast.success("Success to get user", { id: "recipe879855" });
     }
 
+    if (isFollowPending) {
+        toast.success("Success to get user", { id: "userFollowToastId" });
+    }
+    if (isUnFollowPending) {
+        toast.success("Success to get user", { id: "userUnFollowToastId" });
+    }
+
     const handleFollow = () => {
-        setIsFollowing((prev) => !prev);
+        follow(params?.userProfileId as any)
+        setIsFollowing(true);
     };
 
+    const handleUnFollow = () => {
+        unFollow(params?.userProfileId as any)
+        setIsFollowing(false);
+    };
 
     const userData = data?.data;
     const allRecipeData = recipeData?.data;
 
-    const allRecipeSharedByThisUser = allRecipeData?.filter((recipe: any) => recipe?.author?._id === user?.id);
+    const allRecipeSharedByThisUser = allRecipeData?.filter((recipe: any) => recipe?.author?._id === profileUserId);
 
 
     return (
@@ -124,15 +95,29 @@ const MyProfilePage = () => {
                         </div>
                     </section>
                     <section>
-                        <button
-                            onClick={handleFollow}
-                            className={`mt-4 md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
-                                ? "bg-slate-950 text-white"
-                                : " bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600"
-                                }`}
-                        >
-                            {isFollowing ? "UnFollow" : "Follow"}
-                        </button>
+                        {
+                            !isFollowing ? (
+                                <button
+                                    onClick={handleFollow}
+                                    className={` md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
+                                        ? "bg-slate-950 text-white"
+                                        : " bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600"
+                                        }`}
+                                >
+                                    Follow
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleUnFollow}
+                                    className={` md:mt-0 px-6 py-2 rounded-full font-semibold ${isFollowing
+                                        ? "bg-slate-950 text-white"
+                                        : " bg-white sm:bg-yellow-500 sm:text-white sm:hover:bg-yellow-600"
+                                        }`}
+                                >
+                                    UnFollow
+                                </button>
+                            )
+                        }
                     </section>
                 </section>
 

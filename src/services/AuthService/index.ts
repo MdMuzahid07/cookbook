@@ -103,6 +103,39 @@ export const getSingleUserById = async (id: any) => {
 };
 
 
+
+
+// follow un-follow 
+
+
+
+export const followUser = async (id: any) => {
+    try {
+
+        const { data } = await axiosInstance.post(`/user/follow/${id}`);
+
+        return data;
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
+
+export const unFollowUser = async (id: any) => {
+    try {
+
+        const { data } = await axiosInstance.post(`/user/un-follow/${id}`);
+
+        return data;
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
+
+
+
+
+
+
 export const getCurrentUser = async () => {
     const accessToken = cookies().get("accessToken")?.value;
 

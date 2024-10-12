@@ -113,7 +113,7 @@ const MainNavbar = () => {
                                 user ? user?.email : ""
                             }</p>
                         </DropdownItem>
-                        <DropdownItem as={Link} href="/profile">
+                        <DropdownItem as={Link} href="/dashboard/my-profile">
                             <span className="w-ful h-full text-md font-bold text-slate-700">
                                 My Profile
                             </span>

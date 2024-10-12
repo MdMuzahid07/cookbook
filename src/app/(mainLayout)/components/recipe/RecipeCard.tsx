@@ -15,6 +15,8 @@ const RecipeCard = ({ recipe, delay }: any) => {
     // Check if in view the card
     const isInView = useInView(ref, { once: true });
 
+    console.log(recipe)
+
 
     useEffect(() => {
         if (isInView) {
@@ -27,7 +29,11 @@ const RecipeCard = ({ recipe, delay }: any) => {
 
     const handleClick = (id: string) => {
         router.push(`/${id}`)
-    }
+    };
+
+    const handleClickProfile = (id: string) => {
+        router.push(`/profile/${id}`)
+    };
 
 
     return (
@@ -41,65 +47,68 @@ const RecipeCard = ({ recipe, delay }: any) => {
             }}
             transition={{ duration: 0.5, delay, ease: "easeInOut" }}
         >
-            <section onClick={() => handleClick(recipe?._id)} className="w-full mx-auto border-2 border-slate-100 bg-slate-950 text-slate-400 rounded-2xl transition duration-300 cursor-pointer text-left hover:scale-105">
+            <section className="w-full mx-auto border-2 border-slate-100 bg-slate-950 text-slate-400 rounded-2xl transition duration-300 cursor-pointer text-left hover:scale-105">
                 <div className="p-4">
                     {/* Post Header */}
-                    <div className="flex items-center space-x-3">
+                    <section onClick={() => handleClickProfile(recipe?.author?._id)} className="flex items-center space-x-3">
                         <Avatar
-                            src={recipe?.avatarUrl}
+                            src={recipe?.author?.avatar}
                         />
                         <div>
                             <div className="text-sm font-semibold">{recipe?.user}</div>
                             <div className="text-xs text-slate-400">Posted in r/Recipes</div>
                         </div>
-                    </div>
+                    </section>
+                    <section onClick={() => handleClick(recipe?._id)}>
 
-                    {/* Post Title */}
-                    <h2 className="mt-3 text-xl font-bold text-slate-400 hover:text-blue-500 cursor-pointer">
-                        {recipe?.title}
-                    </h2>
 
-                    {/* Post Body */}
-                    <p className="mt-2 text-sm text-slate-400 line-clamp-3">
-                        {recipe?.description}
-                    </p>
+                        {/* Post Title */}
+                        <h2 className="mt-3 text-xl font-bold text-slate-400 hover:text-blue-500 cursor-pointer">
+                            {recipe?.title}
+                        </h2>
 
-                    {/* Post Image */}
-                    <div className="mt-3 w-full h-64 relative">
-                        <Image
-                            src={recipe?.images}
-                            alt="recipe image"
-                            layout="fill"
-                            objectFit="cover"
-                            className="rounded-lg"
-                        />
-                    </div>
+                        {/* Post Body */}
+                        <p className="mt-2 text-sm text-slate-400 line-clamp-3">
+                            {recipe?.description}
+                        </p>
 
-                    {/* Post Footer */}
-                    <div className="mt-4 flex items-center justify-between text-sm text-slate-400">
-                        {/* Upvote and Downvote Section */}
-                        <div className="flex items-center space-x-2">
-                            <button className="hover:text-yellow-500 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-up"><path d="m5 12 7-7 7 7" /><path d="M12 19V5" /></svg>
-                            </button>
-                            <span className="font-medium">{recipe?.upvotes}</span>
-                            <button className="hover:text-yellow-500 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-down"><path d="M12 5v14" /><path d="m19 12-7 7-7-7" /></svg>
-                            </button>
+                        {/* Post Image */}
+                        <div className="mt-3 w-full h-64 relative">
+                            <Image
+                                src={recipe?.images}
+                                alt="recipe image"
+                                layout="fill"
+                                objectFit="cover"
+                                className="rounded-lg"
+                            />
                         </div>
 
-                        {/* Comment and Share Section */}
-                        <div className="flex items-center space-x-2">
-                            <button className="hover:text-yellow-500 transition-colors">
-                                <i className="fas fa-comment"></i>
-                                <span className="ml-1">{recipe?.comments} Comments</span>
-                            </button>
-                            <button className="hover:text-yellow-500 transition-colors">
-                                <i className="fas fa-share"></i>
-                                <span className="ml-1">Share</span>
-                            </button>
+                        {/* Post Footer */}
+                        <div className="mt-4 flex items-center justify-between text-sm text-slate-400">
+                            {/* Upvote and Downvote Section */}
+                            <div className="flex items-center space-x-2">
+                                <button className="hover:text-yellow-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-up"><path d="m5 12 7-7 7 7" /><path d="M12 19V5" /></svg>
+                                </button>
+                                <span className="font-medium">{recipe?.upvotes}</span>
+                                <button className="hover:text-yellow-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-down"><path d="M12 5v14" /><path d="m19 12-7 7-7-7" /></svg>
+                                </button>
+                            </div>
+
+                            {/* Comment and Share Section */}
+                            <div className="flex items-center space-x-2">
+                                <button className="hover:text-yellow-500 transition-colors">
+                                    <i className="fas fa-comment"></i>
+                                    <span className="ml-1">{recipe?.comments} Comments</span>
+                                </button>
+                                <button className="hover:text-yellow-500 transition-colors">
+                                    <i className="fas fa-share"></i>
+                                    <span className="ml-1">Share</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </section>
         </motion.div>
