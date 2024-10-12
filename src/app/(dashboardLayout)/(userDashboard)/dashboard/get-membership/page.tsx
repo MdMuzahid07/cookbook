@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
+import { useUser } from "@/context/user.provider";
+import { useGetPremiumSubscription } from "@/hooks/membership.hook";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const GetMembership = () => {
     const [selectedOption, setSelectedOption] = useState("");
     const [price, setPrice] = useState(0);
+    const { user } = useUser();
+    const { mutate: subscribePremium, isPending } = useGetPremiumSubscription();
 
     const handleSelectChange = (e: any) => {
         const value = e.target.value;
@@ -29,8 +34,19 @@ const GetMembership = () => {
         }
     };
 
+    if (isPending) {
+        toast.loading("working...", { id: "premiumMembership2452453" });
+    }
+
+
     const handleSubmit = () => {
 
+        const userData = {
+            userId: user?.id,
+            subscription: selectedOption
+        }
+
+        subscribePremium(userData);
     };
 
 

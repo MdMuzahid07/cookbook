@@ -55,12 +55,12 @@ const MyProfilePageDashboard = () => {
 
     const allRecipeSharedByThisUser = allRecipeData?.filter((recipe: any) => recipe?.author?._id === user?.id);
 
-    console.log({
-        allRecipeSharedByThisUser
-    }, "o+++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    // console.log({
+    //     allRecipeSharedByThisUser
+    // }, "o+++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
 
-    // console.log(userData)
+    console.log(userData)
 
 
     // console.log(allRecipeData, "recipeData ======================")
@@ -98,6 +98,7 @@ const MyProfilePageDashboard = () => {
                             <p className="text-gray-600">@{userData?.email?.split("@")[0]}</p>
                             <p className="mt-2 text-gray-700">{userData?.bio}</p>
                             <p className="mt-2 text-gray-700"><strong>Role:</strong> {userData?.role}</p>
+                            <p className="mt-2 text-gray-700"><strong>Subscription:</strong> {userData?.membership ? "Premium Plan" : "Free Plan"}</p>
                             {userData?.membership && (
                                 <p className="mt-2 text-green-600">
                                     <strong>Membership:</strong> {userData?.membership.type} (Expires on {formatDate(userData?.membership.expiresAt)})
