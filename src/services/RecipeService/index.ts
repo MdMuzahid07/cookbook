@@ -101,3 +101,18 @@ export const commentInRecipe = async ({ id, comment }: any) => {
         throw new Error(error);
     }
 };
+
+
+export const rattingInRecipe = async ({ id, rating }: any) => {
+    try {
+
+        const { data } = await axiosInstance.patch(`/recipe/rating/${id}`, { rating });
+
+        revalidateTag("recipes")
+
+        return data;
+
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};

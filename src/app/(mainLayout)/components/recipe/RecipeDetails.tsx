@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { useCommentInRecipe } from "@/hooks/recipe.hook";
+import { useCommentInRecipe, useRattingInRecipe } from "@/hooks/recipe.hook";
 import { Avatar } from "@nextui-org/avatar";
 import { Divider } from "@nextui-org/react";
 import Image from "next/image";
@@ -10,15 +10,45 @@ import { toast } from "sonner";
 
 
 const RecipeDetails = ({ recipe }: any) => {
-
+    const [rating, setRating] = useState(2);
     const { mutate: addComment, isPending } = useCommentInRecipe();
+    const { mutate: addRating, isPending: isRatingPending } = useRattingInRecipe();
     const router = useRouter();
-
     const recipeId = recipe?._id;
 
     const [isChecked, setIsChecked] = useState(
         recipe?.ingredientChecklist?.map((item: any) => item?.isChecked)
     );
+
+    console.log(recipe)
+
+
+    // ratings ===============
+
+    const handleMouseEnter = (value: number) => {
+        setRating(value);
+    };
+
+    const handleMouseLeave = () => {
+        setRating(0);
+    };
+
+
+    if (isRatingPending) {
+        toast.loading("saving...", { id: "ratingInRecipeToastId" });
+    };
+
+    const handleClick = (value: number) => {
+        setRating(value);
+
+        const ratingInfo: any = {
+            id: recipeId,
+            rating: rating.toString()
+        }
+
+        addRating(ratingInfo)
+    };
+
 
     const handleCheckboxChange = (index: number) => {
         const updatedChecked = [...isChecked];
@@ -122,6 +152,7 @@ const RecipeDetails = ({ recipe }: any) => {
                                         </li>
                                     ))}
                                 </ul>
+
                             </section>
                         </div>
                     </section>
@@ -143,6 +174,56 @@ const RecipeDetails = ({ recipe }: any) => {
                                 className="rounded-2xl"
                             />
                         )}
+
+                        <section className="mt-10">
+                            <h2 className="text-3xl font-bold text-slate-700 mb-4">Give a rating of this recipe</h2>
+
+                            <div className="flex items-center">
+                                {[1, 2, 3, 4, 5].map((value) => (
+                                    <span
+                                        key={value}
+                                        className={`cursor-pointer text-2xl ${rating >= value ? "text-yellow-500" : "text-gray-300"
+                                            }`}
+                                        onMouseEnter={() => handleMouseEnter(value)}
+                                        onMouseLeave={handleMouseLeave}
+                                        onClick={() => handleClick(value)}
+                                    >
+                                        ★
+                                    </span>
+                                ))}
+                                {rating > 0 && <p className="pl-3"> ({rating}) </p>}
+                            </div>
+
+                            <section className="mt-10">
+                                <h2 className="text-3xl font-bold text-slate-700 mb-4">Ratings</h2>
+
+                                <section className="mt-4">
+                                    {
+                                        recipe?.ratings?.map(({ author, rating, _id }: any) => {
+
+                                            const numberArray = Array.from({ length: rating }, (_, i) => i + 1);
+
+                                            return (
+                                                <p className="flex items-center gap-3" key={_id}>
+                                                    <span>
+                                                        {numberArray.map((index) => (
+                                                            <span key={index} className="text-yellow-500">★</span>
+                                                        ))}
+
+                                                        {Array.from({ length: 5 - rating }, (_, i) => (
+                                                            <span key={`empty-${i}`} className="text-gray-300">☆</span>
+                                                        ))}
+                                                    </span>
+                                                    <span className="text-xs">
+                                                        {author?.name || "N/A"}
+                                                    </span>
+                                                </p>
+                                            );
+                                        })}
+                                </section>
+
+                            </section>
+                        </section>
                     </section>
                 </section>
 
@@ -170,7 +251,7 @@ const RecipeDetails = ({ recipe }: any) => {
                             ))
                         }
                     </div>
-                    {/* Review Form */}
+                    {/* comment  Form */}
                     <div className="mt-10">
                         <h3 className="text-lg font-semibold  mb-4">Write something about this recipe</h3>
                         <form onSubmit={handleReviewSubmit} className="space-y-4">

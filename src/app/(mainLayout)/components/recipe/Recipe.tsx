@@ -68,6 +68,7 @@ interface RecipeProps {
 
 const Recipe = ({ recipes }: RecipeProps) => {
   const [search, setSearch] = useState("");
+  const [hasMore, setHasMore] = useState(6);
 
   const filteredRecipes = recipes?.filter((recipe: TRecipe) =>
     recipe?.title?.toLowerCase()?.includes(search.toLowerCase())
@@ -101,13 +102,18 @@ const Recipe = ({ recipes }: RecipeProps) => {
       </section>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
         {filteredRecipes?.length > 0 ? (
-          filteredRecipes?.map((recipe: any, index: number) => (
+          filteredRecipes?.slice(0, hasMore)?.map((recipe: any, index: number) => (
             <RecipeCard delay={index * 0.1} key={recipe?._id} recipe={recipe} />
           ))
         ) : (
           <p className="text-gray-200 text-3xl font-bold">No recipes found.</p>
         )}
       </div>
+      <section className="flex justify-center mt-20">
+        {
+          (recipes?.length > hasMore) && <Button size="lg" className="bg-white hover:bg-red-500 hover:text-white hover:font-bold hover:scale-125 text-xl rounded-full" onClick={() => setHasMore(hasMore + 3)}>Load More</Button>
+        }
+      </section>
     </section>
   )
 }

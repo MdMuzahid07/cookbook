@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { commentInRecipe, createRecipe, deleteARecipe, getAllRecipe, updateARecipe, UpDownVoteToggler } from "@/services/RecipeService";
+import { commentInRecipe, createRecipe, deleteARecipe, getAllRecipe, rattingInRecipe, updateARecipe, UpDownVoteToggler } from "@/services/RecipeService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -98,6 +98,24 @@ export const useCommentInRecipe = () => {
             },
             onError: (error: any) => {
                 toast.error(error.message, { id: "commentInRecipeToastId" });
+            },
+        }
+    );
+
+};
+
+
+export const useRattingInRecipe = () => {
+
+    return useMutation<any>(
+        {
+            mutationKey: ["RATING_IN_RECIPE"],
+            mutationFn: async (ratingInfo) => await rattingInRecipe(ratingInfo),
+            onSuccess: () => {
+                toast.success("saved...", { id: "ratingInRecipeToastId" });
+            },
+            onError: (error: any) => {
+                toast.error(error.message, { id: "ratingInRecipeToastId" });
             },
         }
     );
