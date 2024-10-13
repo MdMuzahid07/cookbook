@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { useUser } from "@/context/user.provider";
+import { useGetUserById } from "@/hooks/auth.hook";
 import { useUpDownVote } from "@/hooks/recipe.hook";
 import { Avatar } from "@nextui-org/avatar";
 import { motion, useAnimation, useInView } from "framer-motion";
@@ -69,6 +71,8 @@ interface RecipeCardProps {
 const RecipeCard = ({ recipe, delay = 0 }: RecipeCardProps) => {
     const { mutate: upDownVote, isPending } = useUpDownVote();
     const router = useRouter();
+    const { user } = useUser();
+    const { data } = useGetUserById(user?.id);
 
     // Animation hooks
     const controls = useAnimation();
@@ -115,6 +119,10 @@ const RecipeCard = ({ recipe, delay = 0 }: RecipeCardProps) => {
         upDownVote(voteInfo);
     };
 
+
+    const userData = data?.data;
+
+
     return (
         <motion.div
             ref={ref}
@@ -136,27 +144,61 @@ const RecipeCard = ({ recipe, delay = 0 }: RecipeCardProps) => {
                         </div>
                     </section>
 
-                    <section onClick={() => handleClick(recipe?._id)}>
-                        <h2 className="mt-3 text-xl font-bold text-slate-400 hover:text-blue-500 cursor-pointer">
-                            {recipe?.title}
-                        </h2>
+                    {
+                        (recipe?.isPremium && !userData?.membership) && (
+                            <section className="relative">
+                                <span className="text-red-500 absolute right-1 -top-10 bg-white text-xs px-2 rounded-full">Premium Content</span>
 
-                        <p className="mt-2 text-sm text-slate-400 line-clamp-3">
-                            {recipe?.description}
-                        </p>
+                                <div className="opacity-45">
+                                    <h2 className="mt-3 text-xl font-bold text-slate-400 hover:text-blue-500 cursor-pointer">
+                                        {recipe?.title}
+                                    </h2>
 
-                        {recipe?.images && (
-                            <div className="mt-3 w-full h-64 relative">
-                                <Image
-                                    src={recipe?.images}
-                                    alt="recipe image"
-                                    fill
-                                    style={{ objectFit: "cover" }}
-                                    className="rounded-lg"
-                                />
-                            </div>
-                        )}
-                    </section>
+                                    <p className="mt-2 text-sm text-slate-400 line-clamp-3">
+                                        {recipe?.description}
+                                    </p>
+
+                                    {recipe?.images && (
+                                        <div className="mt-3 w-full h-64 relative">
+                                            <Image
+                                                src={recipe?.images}
+                                                alt="recipe image"
+                                                fill
+                                                style={{ objectFit: "cover" }}
+                                                className="rounded-lg"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </section>
+                        )
+                    }
+
+                    {
+                        !recipe?.isPremium && (
+                            <section onClick={() => handleClick(recipe?._id)}>
+                                <h2 className="mt-3 text-xl font-bold text-slate-400 hover:text-blue-500 cursor-pointer">
+                                    {recipe?.title}
+                                </h2>
+
+                                <p className="mt-2 text-sm text-slate-400 line-clamp-3">
+                                    {recipe?.description}
+                                </p>
+
+                                {recipe?.images && (
+                                    <div className="mt-3 w-full h-64 relative">
+                                        <Image
+                                            src={recipe?.images}
+                                            alt="recipe image"
+                                            fill
+                                            style={{ objectFit: "cover" }}
+                                            className="rounded-lg"
+                                        />
+                                    </div>
+                                )}
+                            </section>
+                        )
+                    }
 
                     <section className="mt-4 flex items-center justify-between text-sm text-slate-400">
                         {/* Upvote and Downvote Section */}

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { blockUnblockUser, followUser, getSingleUserById, promoteDemoteUser, publishUbPublishRecipe, registerUser, resetPassword, resetPasswordRequest, unFollowUser, updateUser, userLogin } from "@/services/AuthService";
+import { adminAccountRegistration, blockUnblockUser, followUser, getSingleUserById, promoteDemoteUser, publishUbPublishRecipe, registerUser, resetPassword, resetPasswordRequest, unFollowUser, updateUser, userLogin } from "@/services/AuthService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -16,6 +16,24 @@ export const useUserRegistration = () => {
             },
             onError: (error) => {
                 toast.error(error.message, { id: "userRegisterToastId" });
+            },
+        }
+    );
+
+};
+
+
+export const useAdminAccountRegistration = () => {
+
+    return useMutation<any, Error, FieldValues>(
+        {
+            mutationKey: ["ADMIN_ACCOUNT_REGISTRATION"],
+            mutationFn: async (userData) => await adminAccountRegistration(userData),
+            onSuccess: () => {
+                toast.success("admin registered successfully", { id: "userAccountRegistrationToastId" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "userAccountRegistrationToastId" });
             },
         }
     );

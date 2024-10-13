@@ -36,7 +36,7 @@ export const updateARecipe = async ({ id, recipeData }: any) => {
         return data;
 
     } catch (error: any) {
-        throw new Error(error);
+        return error;
     }
 };
 

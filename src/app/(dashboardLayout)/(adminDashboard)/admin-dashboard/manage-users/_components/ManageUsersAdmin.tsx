@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import React from 'react';
-import Image from 'next/image';
 import { toast } from 'sonner';
-import { Button, Tooltip } from '@nextui-org/react';
+import { Avatar, Button, Tooltip } from '@nextui-org/react';
 import { useUserBlockUnBlock, useUserPromoteDemote } from '@/hooks/auth.hook';
 
 
@@ -34,6 +33,7 @@ const ManageUsersAdminComponent = ({ users }: any) => {
   return (
     <section className="bg-yellow-500 py-20 min-h-screen">
       <section className="max-w-7xl mx-auto overflow-x-auto px-6">
+        <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-10">Manage Users</h1>
         <table className="min-w-full rounded-2xl bg-white overflow-hidden">
           <thead>
             <tr className="bg-gray-200 text-gray-700">
@@ -41,6 +41,7 @@ const ManageUsersAdminComponent = ({ users }: any) => {
               <th className="py-8 px-6 text-left">Image</th>
               <th className="py-8 px-6 text-left">name</th>
               <th className="py-8 px-6 text-left">bio</th>
+              <th className="py-8 px-6 text-left">status</th>
               <th className="py-8 px-6 text-left">role</th>
               <th className="py-8 px-6 text-left">Options</th>
             </tr>
@@ -51,16 +52,15 @@ const ManageUsersAdminComponent = ({ users }: any) => {
                 <tr key={user?._id} className="border-b hover:bg-gray-100">
                   <td className="py-8 px-6">{index + 1}</td>
                   <td className="py-8 px-6">
-                    <Image
+                    <Avatar
+                      size="lg"
                       src={user?.avatar}
                       alt={user?.name}
-                      width={150}
-                      height={100}
-                      className="object-cover rounded-2xl"
                     />
                   </td>
                   <td className="py-8 px-6">{user?.name}</td>
                   <td className="py-8 px-6">{user?.bio}</td>
+                  <td className="py-8 px-6">{user?.isBlocked ? "Blocked" : "Active"}</td>
                   <td className="py-8 px-6">{user?.role}</td>
                   <td className="py-8 px-6">
                     <section className="flex items-center space-x-4">

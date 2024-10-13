@@ -29,6 +29,26 @@ export const registerUser = async (userData: FieldValues) => {
 }
 
 
+
+export const adminAccountRegistration = async (userData: FieldValues) => {
+    try {
+        const { data } = await axiosInstance.post("/user/register", userData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+
+        revalidateTag("users")
+
+        return data;
+
+    } catch (error: any) {
+        return error;
+    }
+}
+
+
+
 export const updateUser = async (userData: FieldValues) => {
     try {
 

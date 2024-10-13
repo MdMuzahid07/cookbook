@@ -27,6 +27,10 @@ const ManageRecipeComponent = ({ recipes }: any) => {
         router.push(`/dashboard/update-recipe/${id}`);
     };
 
+    const handleDetailsPage = (id: string) => {
+        router.push(`/${id}`);
+    };
+
 
     return (
         <section className="bg-yellow-500 py-20 min-h-screen">
@@ -47,7 +51,7 @@ const ManageRecipeComponent = ({ recipes }: any) => {
                             recipes?.map((recipe: any, index: any) => (
                                 <tr key={recipe?._id} className="border-b hover:bg-gray-100">
                                     <td className="py-8 px-6">{index + 1}</td>
-                                    <td className="py-8 px-6">
+                                    <td onClick={() => handleDetailsPage(recipe?._id)} className="py-8 px-6 cursor-pointer">
                                         <Image
                                             src={recipe?.images}
                                             alt={recipe?.title}
@@ -56,9 +60,9 @@ const ManageRecipeComponent = ({ recipes }: any) => {
                                             className="object-cover rounded-2xl"
                                         />
                                     </td>
-                                    <td className="py-8 px-6">{recipe?.title}</td>
-                                    <td className="py-8 px-6">{recipe?.description}</td>
-                                    <td className="py-8 px-6">{recipe?.category}</td>
+                                    <td onClick={() => handleDetailsPage(recipe?._id)} className="py-8 px-6 cursor-pointer">{recipe?.title}</td>
+                                    <td onClick={() => handleDetailsPage(recipe?._id)} className="py-8 px-6 cursor-pointer">{recipe?.description}</td>
+                                    <td onClick={() => handleDetailsPage(recipe?._id)} className="py-8 px-6 cursor-pointer">{recipe?.category}</td>
                                     <td className="py-8 px-6">
                                         <section className="flex items-center space-x-4">
                                             <button onClick={() => handleUpdatePageRedirect(recipe?._id)} className="bg-slate-300 rounded-full w-10 h-10 flex justify-center items-center hover:bg-yellow-500 hover:text-white">

@@ -1,8 +1,11 @@
 import React from 'react'
+import ManageAdminAccountsComponents from './_components/ManageAdminComponents'
 
 const ManageAdminAccounts = () => {
     return (
-        <div>ManageAdminAccounts</div>
+        <div>
+            <ManageAdminAccountsComponents />
+        </div>
     )
 }
 
