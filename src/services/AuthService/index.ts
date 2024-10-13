@@ -3,6 +3,7 @@
 
 import axiosInstance from "@/lib/AxiosInstance"
 import { jwtDecode } from "jwt-decode";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
@@ -132,6 +133,18 @@ export const unFollowUser = async (id: any) => {
 };
 
 
+
+export const publishUbPublishRecipe = async ({ id }: any) => {
+    try {
+        const { data } = await axiosInstance.patch(`/user/publish-unpublish-recipe/${id}`);
+
+        revalidateTag("recipes");
+
+        return data;
+    } catch (error: any) {
+        return error;
+    }
+};
 
 
 

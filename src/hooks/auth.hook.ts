@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { followUser, getSingleUserById, registerUser, resetPassword, resetPasswordRequest, unFollowUser, updateUser, userLogin } from "@/services/AuthService";
+import { followUser, getSingleUserById, publishUbPublishRecipe, registerUser, resetPassword, resetPasswordRequest, unFollowUser, updateUser, userLogin } from "@/services/AuthService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -107,7 +107,7 @@ export const useFollowUser = () => {
 
     return useMutation<any, Error, FieldValues>(
         {
-            mutationKey: ["USER_REGISTRATION"],
+            mutationKey: ["USER_FOLLOW"],
             mutationFn: async (id) => await followUser(id),
             onSuccess: () => {
                 toast.success("user followed successfully", { id: "userFollowToastId" });
@@ -125,13 +125,32 @@ export const useUnFollowUser = () => {
 
     return useMutation<any, Error, FieldValues>(
         {
-            mutationKey: ["USER_REGISTRATION"],
+            mutationKey: ["USER_UNFOLLOW"],
             mutationFn: async (id) => await unFollowUser(id),
             onSuccess: () => {
                 toast.success("user un followed successfully", { id: "userUnFollowToastId" });
             },
             onError: (error) => {
                 toast.error(error.message, { id: "userUnFollowToastId" });
+            },
+        }
+    );
+
+};
+
+
+
+export const useRecipePublishUnPublish = () => {
+
+    return useMutation<any, Error, FieldValues>(
+        {
+            mutationKey: ["RECIPE_PUBLISH_UNPUBLISH"],
+            mutationFn: async ({ id }) => await publishUbPublishRecipe({ id }),
+            onSuccess: () => {
+                toast.success("Changed Status", { id: "recipePublishUnPublish" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "recipePublishUnPublish" });
             },
         }
     );

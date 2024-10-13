@@ -111,7 +111,7 @@ const Recipe = ({ recipes }: RecipeProps) => {
       </div>
       <section className="flex justify-center mt-20">
         {
-          (recipes?.length > hasMore) && <Button size="lg" className="bg-white hover:bg-red-500 hover:text-white hover:font-bold hover:scale-125 text-xl rounded-full" onClick={() => setHasMore(hasMore + 3)}>Load More</Button>
+          (recipes?.length > hasMore) && <Button size="lg" className="bg-gradient-to-r from-red-500 to-slate-950 font-bold hover:bg-red-500 text-white hover:font-extrabold hover:scale-125 text-xl rounded-full" onClick={() => setHasMore(hasMore + 3)}>Load More</Button>
         }
       </section>
     </section>
