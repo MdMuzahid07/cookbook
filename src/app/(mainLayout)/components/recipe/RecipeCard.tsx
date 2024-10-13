@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import { useUpDownVote } from "@/hooks/recipe.hook";
 import { Avatar } from "@nextui-org/avatar";
 import { motion, useAnimation, useInView } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 const RecipeCard = ({ recipe, delay }: any) => {
+
+    const { mutate: upDownVote, isPending } = useUpDownVote();
+
     const router = useRouter();
     // this hook used to control the animation
     const controls = useAnimation();
@@ -14,9 +19,7 @@ const RecipeCard = ({ recipe, delay }: any) => {
     const ref = useRef(null);
     // Check if in view the card
     const isInView = useInView(ref, { once: true });
-
     console.log(recipe)
-
 
     useEffect(() => {
         if (isInView) {
@@ -35,6 +38,25 @@ const RecipeCard = ({ recipe, delay }: any) => {
         router.push(`/profile/${id}`)
     };
 
+    if (isPending) {
+        toast.loading("saving...", { id: "recipeUpDownVoteNotificationToast" });
+    }
+
+    const handleUpVote = (id: string) => {
+        const voteInfo: any = {
+            recipeId: id,
+            voteType: "upVote"
+        };
+        upDownVote(voteInfo);
+    };
+
+    const handleDownVote = (id: string) => {
+        const voteInfo: any = {
+            recipeId: id,
+            voteType: "downVote"
+        };
+        upDownVote(voteInfo);
+    };
 
     return (
         <motion.div
@@ -83,32 +105,32 @@ const RecipeCard = ({ recipe, delay }: any) => {
                             />
                         </div>
 
-                        {/* Post Footer */}
-                        <div className="mt-4 flex items-center justify-between text-sm text-slate-400">
-                            {/* Upvote and Downvote Section */}
-                            <div className="flex items-center space-x-2">
-                                <button className="hover:text-yellow-500 transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-up"><path d="m5 12 7-7 7 7" /><path d="M12 19V5" /></svg>
-                                </button>
-                                <span className="font-medium">{recipe?.upvotes}</span>
-                                <button className="hover:text-yellow-500 transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-down"><path d="M12 5v14" /><path d="m19 12-7 7-7-7" /></svg>
-                                </button>
-                            </div>
-
-                            {/* Comment and Share Section */}
-                            <div className="flex items-center space-x-2">
-                                <button className="hover:text-yellow-500 transition-colors">
-                                    <i className="fas fa-comment"></i>
-                                    <span className="ml-1">{recipe?.comments} Comments</span>
-                                </button>
-                                <button className="hover:text-yellow-500 transition-colors">
-                                    <i className="fas fa-share"></i>
-                                    <span className="ml-1">Share</span>
-                                </button>
-                            </div>
-                        </div>
                     </section>
+                    {/* Post Footer */}
+                    <div className="mt-4 flex items-center justify-between text-sm text-slate-400">
+                        {/* Upvote and Downvote Section */}
+                        <div className="flex items-center space-x-2">
+                            <button onClick={() => handleUpVote(recipe?._id)} className="hover:text-yellow-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-up"><path d="m5 12 7-7 7 7" /><path d="M12 19V5" /></svg>
+                            </button>
+                            <span className="font-medium text-white">{recipe?.upVotes?.length}</span>
+                            <button onClick={() => handleDownVote(recipe?._id)} className="hover:text-yellow-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-down"><path d="M12 5v14" /><path d="m19 12-7 7-7-7" /></svg>
+                            </button>
+                        </div>
+
+                        {/* Comment and Share Section */}
+                        <div className="flex items-center space-x-2">
+                            <button className="hover:text-yellow-500 transition-colors">
+                                <i className="fas fa-comment"></i>
+                                <span className="ml-1">{recipe?.comments} Comments</span>
+                            </button>
+                            {/* <button className="hover:text-yellow-500 transition-colors">
+                                <i className="fas fa-share"></i>
+                                <span className="ml-1">Share</span>
+                            </button> */}
+                        </div>
+                    </div>
                 </div>
             </section>
         </motion.div>

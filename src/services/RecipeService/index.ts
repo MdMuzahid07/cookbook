@@ -70,3 +70,19 @@ export const getAllRecipe = async () => {
         throw new Error(error);
     }
 };
+
+
+
+export const UpDownVoteToggler = async ({ recipeId, voteType }: any) => {
+    try {
+
+        const { data } = await axiosInstance.post(`/vote/add-vote/${recipeId}`, { voteType });
+
+        revalidateTag("recipes")
+
+        return data;
+
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};

@@ -113,12 +113,15 @@ const MainNavbar = () => {
                                 user ? user?.email : ""
                             }</p>
                         </DropdownItem>
-                        <DropdownItem as={Link} href="/dashboard/my-profile">
+                        <DropdownItem className={`${!user && "hidden"}`} as={Link}
+                            href={(user?.role === "user") && "/dashboard/my-profile" || (user?.role === "admin") && "admin-dashboard/admin-profile"}
+                        >
                             <span className="w-ful h-full text-md font-bold text-slate-700">
                                 My Profile
                             </span>
                         </DropdownItem>
-                        <DropdownItem as={Link} href="/dashboard/my-profile">
+                        <DropdownItem className={`${!user && "hidden"}`} as={Link} href={(user?.role === "user") && "/dashboard/my-profile" || (user?.role === "admin") && "admin-dashboard/manage-users"}
+                        >
                             <span className="w-ful h-full text-md font-bold text-slate-700">
                                 Dashboard
                             </span>
@@ -128,7 +131,7 @@ const MainNavbar = () => {
                                 Register/Login
                             </span>
                         </DropdownItem>
-                        <DropdownItem onClick={handleLogout}>
+                        <DropdownItem className={`${!user && "hidden"}`} onClick={handleLogout}>
                             <span className="w-ful h-full text-md font-bold text-slate-700">
                                 Logout
                             </span>
