@@ -1,0 +1,109 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
+import React from 'react';
+import Image from 'next/image';
+import { toast } from 'sonner';
+import { Button, Tooltip } from '@nextui-org/react';
+import { useUserBlockUnBlock, useUserPromoteDemote } from '@/hooks/auth.hook';
+
+
+const ManageUsersAdminComponent = ({ users }: any) => {
+  const { mutate: blockUnBlockUser, isPending } = useUserBlockUnBlock();
+  const { mutate: promoteDemoteUser, isPending: isPromotePending } = useUserPromoteDemote();
+
+
+  if (isPending) {
+    toast.loading("Working...", { id: "userBlockUnBlockToastId" })
+  }
+
+
+  if (isPromotePending) {
+    toast.loading("Working...", { id: "userPromoteDemoteToastId" })
+  }
+
+
+  const handleBlockUnBlock = (id: string) => {
+    blockUnBlockUser({ id });
+  };
+
+  const handlePromoteDemote = (id: string) => {
+    promoteDemoteUser({ id });
+  };
+
+
+  return (
+    <section className="bg-yellow-500 py-20 min-h-screen">
+      <section className="max-w-7xl mx-auto overflow-x-auto px-6">
+        <table className="min-w-full rounded-2xl bg-white overflow-hidden">
+          <thead>
+            <tr className="bg-gray-200 text-gray-700">
+              <th className="py-8 px-6 text-left">No</th>
+              <th className="py-8 px-6 text-left">Image</th>
+              <th className="py-8 px-6 text-left">name</th>
+              <th className="py-8 px-6 text-left">bio</th>
+              <th className="py-8 px-6 text-left">role</th>
+              <th className="py-8 px-6 text-left">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              users?.map((user: any, index: any) => (
+                <tr key={user?._id} className="border-b hover:bg-gray-100">
+                  <td className="py-8 px-6">{index + 1}</td>
+                  <td className="py-8 px-6">
+                    <Image
+                      src={user?.avatar}
+                      alt={user?.name}
+                      width={150}
+                      height={100}
+                      className="object-cover rounded-2xl"
+                    />
+                  </td>
+                  <td className="py-8 px-6">{user?.name}</td>
+                  <td className="py-8 px-6">{user?.bio}</td>
+                  <td className="py-8 px-6">{user?.role}</td>
+                  <td className="py-8 px-6">
+                    <section className="flex items-center space-x-4">
+                      <Tooltip content="block unblock this user">
+                        <Button onClick={() => handleBlockUnBlock(user?._id)} className={`${user?.isBlocked ? "bg-red-500" : "bg-green-500"} font-bold`}>
+                          {
+                            user?.isBlocked ? (
+                              <span>
+                                UnBlock
+                              </span>
+                            ) : (
+                              <span>
+                                Block
+                              </span>
+                            )
+                          }
+                        </Button>
+                      </Tooltip>
+                      <Tooltip content="promote or demote user">
+                        <Button onClick={() => handlePromoteDemote(user?._id)} className={`${user?.role === "user" ? "bg-yellow-500" : "bg-red-500"} font-bold rounded-full`}>
+                          {
+                            user?.role === "user" ? (
+                              <span>
+                                Promote Admin
+                              </span>
+                            ) : (
+                              <span>
+                                Demote User
+                              </span>
+                            )
+                          }
+                        </Button>
+                      </Tooltip>
+                    </section>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </section>
+    </section>
+  );
+};
+
+export default ManageUsersAdminComponent;

@@ -12,7 +12,7 @@ const RecipeFeed = async () => {
         }
     });
     const data = await res.json();
-    const recipes = data?.data;
+    const recipes = data?.data?.filter((recipe: any) => recipe?.isPublished === true);
 
     return (
         <section className="bg-yellow-500">

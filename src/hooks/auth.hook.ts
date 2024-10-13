@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { followUser, getSingleUserById, publishUbPublishRecipe, registerUser, resetPassword, resetPasswordRequest, unFollowUser, updateUser, userLogin } from "@/services/AuthService";
+import { blockUnblockUser, followUser, getSingleUserById, promoteDemoteUser, publishUbPublishRecipe, registerUser, resetPassword, resetPasswordRequest, unFollowUser, updateUser, userLogin } from "@/services/AuthService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -147,10 +147,46 @@ export const useRecipePublishUnPublish = () => {
             mutationKey: ["RECIPE_PUBLISH_UNPUBLISH"],
             mutationFn: async ({ id }) => await publishUbPublishRecipe({ id }),
             onSuccess: () => {
-                toast.success("Changed Status", { id: "recipePublishUnPublish" });
+                toast.success("changed recipe Status", { id: "recipePublishUnPublish" });
             },
             onError: (error) => {
                 toast.error(error.message, { id: "recipePublishUnPublish" });
+            },
+        }
+    );
+
+};
+
+
+export const useUserBlockUnBlock = () => {
+
+    return useMutation<any, Error, FieldValues>(
+        {
+            mutationKey: ["USER_BLOCK_UNBLOCK"],
+            mutationFn: async ({ id }) => await blockUnblockUser({ id }),
+            onSuccess: () => {
+                toast.success("changed user status", { id: "userBlockUnBlockToastId" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "userBlockUnBlockToastId" });
+            },
+        }
+    );
+
+};
+
+
+export const useUserPromoteDemote = () => {
+
+    return useMutation<any, Error, FieldValues>(
+        {
+            mutationKey: ["USER_PROMOTE_DEMOTE"],
+            mutationFn: async ({ id }) => await promoteDemoteUser({ id }),
+            onSuccess: () => {
+                toast.success("changed user role status", { id: "userPromoteDemoteToastId" });
+            },
+            onError: (error) => {
+                toast.error(error.message, { id: "userPromoteDemoteToastId" });
             },
         }
     );

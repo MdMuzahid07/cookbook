@@ -147,6 +147,35 @@ export const publishUbPublishRecipe = async ({ id }: any) => {
 };
 
 
+export const blockUnblockUser = async ({ id }: any) => {
+    try {
+        const { data } = await axiosInstance.patch(`/user/block-unblock/${id}`);
+
+        revalidateTag("users");
+
+        return data;
+    } catch (error: any) {
+        return error;
+    }
+};
+
+
+export const promoteDemoteUser = async ({ id }: any) => {
+    try {
+        const { data } = await axiosInstance.patch(`/user/promote-demote-user/${id}`);
+
+        revalidateTag("users");
+
+        return data;
+    } catch (error: any) {
+        return error;
+    }
+};
+
+
+
+
+
 
 
 export const getCurrentUser = async () => {
