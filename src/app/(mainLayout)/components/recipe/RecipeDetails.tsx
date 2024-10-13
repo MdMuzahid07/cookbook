@@ -20,9 +20,6 @@ const RecipeDetails = ({ recipe }: any) => {
         recipe?.ingredientChecklist?.map((item: any) => item?.isChecked)
     );
 
-    console.log(recipe)
-
-
     // ratings ===============
 
     const handleMouseEnter = (value: number) => {

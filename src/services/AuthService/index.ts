@@ -63,7 +63,7 @@ export const userLogin = async (userData: FieldValues) => {
 
         return data;
     } catch (error: any) {
-        throw new Error(error);
+        return error;
     }
 };
 

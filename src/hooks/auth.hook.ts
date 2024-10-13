@@ -91,14 +91,13 @@ export const useResetPassword = () => {
 
 
 
-export const useGetUserById = (id: string) => {
-    return useQuery(
-        { queryKey: ["GET_USER", id], queryFn: () => getSingleUserById(id) }
-
-    );
+export const useGetUserById = (id: string | undefined) => {
+    return useQuery({
+        queryKey: ["users", id],
+        queryFn: () => getSingleUserById(id!),
+        enabled: !!id
+    });
 };
-
-
 
 
 // user follow unFollow 

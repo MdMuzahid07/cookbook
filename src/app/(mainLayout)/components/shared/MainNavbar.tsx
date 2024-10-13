@@ -114,13 +114,15 @@ const MainNavbar = () => {
                             }</p>
                         </DropdownItem>
                         <DropdownItem className={`${!user && "hidden"}`} as={Link}
-                            href={(user?.role === "user") && "/dashboard/my-profile" || (user?.role === "admin") && "admin-dashboard/admin-profile"}
+                            href={
+                                (user?.role === "user") && "/dashboard/my-profile" || (user?.role === "admin") && "admin-dashboard/admin-profile" || "/"
+                            }
                         >
                             <span className="w-ful h-full text-md font-bold text-slate-700">
                                 My Profile
                             </span>
                         </DropdownItem>
-                        <DropdownItem className={`${!user && "hidden"}`} as={Link} href={(user?.role === "user") && "/dashboard/my-profile" || (user?.role === "admin") && "admin-dashboard/manage-users"}
+                        <DropdownItem className={`${!user && "hidden"}`} as={Link} href={(user?.role === "user") && "/dashboard/my-profile" || (user?.role === "admin") && "admin-dashboard/manage-users" || "/"}
                         >
                             <span className="w-ful h-full text-md font-bold text-slate-700">
                                 Dashboard

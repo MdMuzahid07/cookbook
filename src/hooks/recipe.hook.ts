@@ -63,8 +63,10 @@ export const useDeleteRecipe = () => {
 
 export const useGetAllRecipe = () => {
     return useQuery(
-        { queryKey: ["GET_ALL_RECIPE"], queryFn: () => getAllRecipe() }
-
+        {
+            queryKey: ["GET_ALL_RECIPE"],
+            queryFn: () => getAllRecipe()
+        }
     );
 };
 

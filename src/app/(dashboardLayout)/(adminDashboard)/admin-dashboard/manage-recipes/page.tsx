@@ -4,6 +4,7 @@ import AdminManageRecipeComponent from './_components/AdminManageRecipe';
 
 const AdminManageRecipe = async () => {
     const res = await fetch(`${envConfig.baseApi}/recipe`, {
+        cache: "no-store",
         next: {
             tags: ["recipes"]
         }

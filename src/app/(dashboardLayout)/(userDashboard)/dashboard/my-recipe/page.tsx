@@ -4,6 +4,7 @@ import envConfig from '@/config/envConfig';
 
 const ManageRecipe = async () => {
     const res = await fetch(`${envConfig.baseApi}/recipe`, {
+        cache: "no-store",
         next: {
             tags: ["recipes"]
         }

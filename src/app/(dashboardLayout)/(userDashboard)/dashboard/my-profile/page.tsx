@@ -50,16 +50,6 @@ const MyProfilePageDashboard = () => {
 
     const allRecipeSharedByThisUser = allRecipeData?.filter((recipe: any) => recipe?.author?._id === user?.id);
 
-    // console.log({
-    //     allRecipeSharedByThisUser
-    // }, "o+++++++++++++++++++++++++++++++++++++++++++++++++++++")
-
-
-    // console.log(userData)
-
-
-    // console.log(allRecipeData, "recipeData ======================")
-
 
     return (
         <div className="bg-yellow-500 min-h-screen pb-32">
