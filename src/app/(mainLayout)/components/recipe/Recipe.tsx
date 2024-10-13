@@ -4,11 +4,72 @@ import { Button } from '@nextui-org/react';
 import { motion } from "framer-motion";
 import RecipeCard from './RecipeCard';
 import { useState } from 'react';
-const Recipe = ({ recipes }: any) => {
+
+
+export interface TCookingTime {
+  prep: number;
+  cook: number;
+}
+
+export interface TIngredient {
+  name: string;
+  quantity: string;
+  category: string;
+}
+
+export interface TRatings {
+  author: string;
+  rating: number;
+}
+
+export interface TNutritionInfo {
+  calories: number;
+  fat: number;
+  carbohydrates: number;
+  protein: number;
+}
+
+export interface TIngredientChecklist {
+  isChecked: boolean;
+  customName: string;
+  customQuantity: string;
+}
+
+export interface TRecipe {
+  title: string;
+  description?: string;
+  ingredients: TIngredient[];
+  instructions: string[];
+  images: string;
+  author: string;
+  category: string;
+  cookingTime: TCookingTime;
+  servings: number;
+  ratings: TRatings[];
+  comments: string[];
+  upVotes: string[];
+  downVotes: string[];
+  isPremium: boolean;
+  tags: string[];
+  nutritionInfo: TNutritionInfo;
+  videoUrl?: string | null;
+  difficulty: "Easy" | "Medium" | "Hard";
+  ingredientChecklist: TIngredientChecklist[];
+  isDeleted: boolean;
+  isPublished: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+interface RecipeProps {
+  recipes: TRecipe[];
+}
+
+
+const Recipe = ({ recipes }: RecipeProps) => {
   const [search, setSearch] = useState("");
 
-
-  const filteredRecipes = recipes?.filter((recipe: any) =>
+  const filteredRecipes = recipes?.filter((recipe: TRecipe) =>
     recipe?.title?.toLowerCase()?.includes(search.toLowerCase())
   );
 
@@ -41,7 +102,7 @@ const Recipe = ({ recipes }: any) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
         {filteredRecipes?.length > 0 ? (
           filteredRecipes?.map((recipe: any, index: number) => (
-            <RecipeCard delay={index * 0.1} key={recipe._id} recipe={recipe} />
+            <RecipeCard delay={index * 0.1} key={recipe?._id} recipe={recipe} />
           ))
         ) : (
           <p className="text-gray-200 text-3xl font-bold">No recipes found.</p>

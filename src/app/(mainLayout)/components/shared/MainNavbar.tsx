@@ -33,7 +33,7 @@ const MainNavbar = () => {
             </NavbarContent>
 
             <NavbarContent className="sm:hidden pr-3" justify="center">
-                <NavbarBrand>
+                <NavbarBrand >
                     <Image
                         alt="logo"
                         src="https://res.cloudinary.com/dsdbqct3r/image/upload/v1728282514/rishhyytfbjqvaqxjqmh.png"

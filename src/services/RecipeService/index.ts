@@ -86,3 +86,18 @@ export const UpDownVoteToggler = async ({ recipeId, voteType }: any) => {
         throw new Error(error);
     }
 };
+
+
+export const commentInRecipe = async ({ id, comment }: any) => {
+    try {
+
+        const { data } = await axiosInstance.post(`/comment/create-comment/${id}`, { comment });
+
+        revalidateTag("recipes")
+
+        return data;
+
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
