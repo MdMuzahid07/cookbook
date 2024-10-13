@@ -13,12 +13,12 @@ const RecipeDetailsPage = async ({ params: { recipeId } }: any) => {
     const recipe = data?.data;
 
     return (
-        <section className="bg-slate-100 md:bg-yellow-500">
+        <div className="bg-slate-100 md:bg-yellow-500">
 
             <DetailsPageBanner recipe={recipe} />
 
             <RecipeDetails recipe={recipe} />
-        </section>
+        </div>
     )
 }
 

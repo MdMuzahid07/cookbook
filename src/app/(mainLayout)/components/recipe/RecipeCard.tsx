@@ -174,6 +174,7 @@ const RecipeCard = ({ recipe, delay = 0 }: RecipeCardProps) => {
                         )
                     }
 
+
                     {
                         !recipe?.isPremium && (
                             <section onClick={() => handleClick(recipe?._id)}>
