@@ -11,7 +11,7 @@ const GetMembership = () => {
     const router = useRouter();
     const [price, setPrice] = useState(0);
     const { user } = useUser();
-    const { mutate: subscribePremium, data, isPending, isSuccess, isError } = useGetPremiumSubscription();
+    const { mutate: subscribePremium, data, isPending, isSuccess } = useGetPremiumSubscription();
 
 
     const paymentLink = data?.data?.paymentResponse?.payment_url;

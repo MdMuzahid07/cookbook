@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 const MyProfilePage = ({ params }: any) => {
     const [activeTab, setActiveTab] = useState('recipes');
     const [isFollowing, setIsFollowing] = useState(false);
-    const profileUserId = params?.userProfileId;
+    const profileUserId = params?.userProfile;
     const { data, error, isLoading } = useGetUserById(profileUserId);
     const { mutate: follow, isPending: isFollowPending } = useFollowUser();
     const { mutate: unFollow, isPending: isUnFollowPending } = useUnFollowUser();

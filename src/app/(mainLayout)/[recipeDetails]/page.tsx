@@ -4,13 +4,16 @@ import DetailsPageBanner from '../components/recipe/DetailsPageBanner';
 import RecipeDetails from '../components/recipe/RecipeDetails';
 
 
-const RecipeDetailsPage = async ({ params: { recipeId } }: any) => {
+const RecipeDetailsPage = async ({ params: { recipeDetails } }: any) => {
 
-    const res = await fetch(`${envConfig.baseApi}/recipe/${recipeId}`, {
+    const res = await fetch(`${envConfig.baseApi}/recipe/${recipeDetails}`, {
         cache: "no-store"
     });
+
+
     const data = await res.json();
     const recipe = data?.data;
+
 
     return (
         <div className="bg-slate-100 md:bg-yellow-500">

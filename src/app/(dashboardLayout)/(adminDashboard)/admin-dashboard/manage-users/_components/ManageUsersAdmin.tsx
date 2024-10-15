@@ -4,11 +4,13 @@ import React from 'react';
 import { toast } from 'sonner';
 import { Avatar, Button, Tooltip } from '@nextui-org/react';
 import { useUserBlockUnBlock, useUserPromoteDemote } from '@/hooks/auth.hook';
+import { useRouter } from 'next/navigation';
 
 
 const ManageUsersAdminComponent = ({ users }: any) => {
   const { mutate: blockUnBlockUser, isPending } = useUserBlockUnBlock();
   const { mutate: promoteDemoteUser, isPending: isPromotePending } = useUserPromoteDemote();
+  const router = useRouter();
 
 
   if (isPending) {
@@ -28,6 +30,10 @@ const ManageUsersAdminComponent = ({ users }: any) => {
   const handlePromoteDemote = (id: string) => {
     promoteDemoteUser({ id });
   };
+
+  const handleGoProfile = (id: string) => {
+    router.push(`/profile/${id}`)
+  }
 
 
   return (
@@ -51,17 +57,17 @@ const ManageUsersAdminComponent = ({ users }: any) => {
               users?.map((user: any, index: any) => (
                 <tr key={user?._id} className="border-b hover:bg-gray-100">
                   <td className="py-8 px-6">{index + 1}</td>
-                  <td className="py-8 px-6">
+                  <td onClick={() => handleGoProfile(user?._id)} className="py-8 px-6 cursor-pointer">
                     <Avatar
                       size="lg"
                       src={user?.avatar}
                       alt={user?.name}
                     />
                   </td>
-                  <td className="py-8 px-6">{user?.name}</td>
-                  <td className="py-8 px-6">{user?.bio}</td>
-                  <td className="py-8 px-6">{user?.isBlocked ? "Blocked" : "Active"}</td>
-                  <td className="py-8 px-6">{user?.role}</td>
+                  <td onClick={() => handleGoProfile(user?._id)} className="py-8 px-6 cursor-pointer">{user?.name}</td>
+                  <td onClick={() => handleGoProfile(user?._id)} className="py-8 px-6 cursor-pointer">{user?.bio}</td>
+                  <td onClick={() => handleGoProfile(user?._id)} className="py-8 px-6 cursor-pointer">{user?.isBlocked ? "Blocked" : "Active"}</td>
+                  <td onClick={() => handleGoProfile(user?._id)} className="py-8 px-6 cursor-pointer">{user?.role}</td>
                   <td className="py-8 px-6">
                     <section className="flex items-center space-x-4">
                       <Tooltip content="block unblock this user">
