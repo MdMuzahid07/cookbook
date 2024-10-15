@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useCommentInRecipe, useRattingInRecipe } from "@/hooks/recipe.hook";
+import calculateAverageRating from "@/lib/calculateAverageRating";
 import { Avatar } from "@nextui-org/avatar";
 import { Divider } from "@nextui-org/react";
 import Image from "next/image";
@@ -45,6 +46,10 @@ const RecipeDetails = ({ recipe }: any) => {
 
         addRating(ratingInfo)
     };
+
+    const ratings = recipe?.ratings;
+
+    const averageRating = calculateAverageRating(ratings);
 
 
     const handleCheckboxChange = (index: number) => {
@@ -192,7 +197,7 @@ const RecipeDetails = ({ recipe }: any) => {
                             </div>
 
                             <section className="mt-10">
-                                <h2 className="text-3xl font-bold text-slate-700 mb-4">Ratings</h2>
+                                <h2 className="text-3xl font-bold text-slate-700 mb-4">Ratings ({averageRating})</h2>
 
                                 <section className="mt-4">
                                     {
@@ -225,7 +230,7 @@ const RecipeDetails = ({ recipe }: any) => {
                 </section>
 
 
-                {/* // ============== ratings, comments =================> */}
+                {/* // ==============  comments =================> */}
                 <Divider />
 
                 <section className="mt-10">

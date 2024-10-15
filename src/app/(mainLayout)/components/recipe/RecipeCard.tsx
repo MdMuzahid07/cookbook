@@ -4,6 +4,7 @@
 import { useUser } from "@/context/user.provider";
 import { useGetUserById } from "@/hooks/auth.hook";
 import { useUpDownVote } from "@/hooks/recipe.hook";
+import calculateAverageRating from "@/lib/calculateAverageRating";
 import { Avatar } from "@nextui-org/avatar";
 import { motion, useAnimation, useInView } from "framer-motion";
 import Image from "next/image";
@@ -123,6 +124,12 @@ const RecipeCard = ({ recipe, delay = 0 }: RecipeCardProps) => {
     const userData = data?.data;
 
 
+    // rating average calculation
+    const ratings = recipe?.ratings;
+
+    const rating = calculateAverageRating(ratings);
+
+
     return (
         <motion.div
             ref={ref}
@@ -158,6 +165,10 @@ const RecipeCard = ({ recipe, delay = 0 }: RecipeCardProps) => {
                                         {recipe?.description}
                                     </p>
 
+                                    <p className="mt-2 text-sm text-slate-400 line-clamp-3">
+                                        Average <span className="font-bold text-yellow-500">ratings</span> ({rating})
+                                    </p>
+
                                     {recipe?.images && (
                                         <div className="mt-3 w-full h-64 relative">
                                             <Image
@@ -174,7 +185,6 @@ const RecipeCard = ({ recipe, delay = 0 }: RecipeCardProps) => {
                         )
                     }
 
-
                     {
                         !recipe?.isPremium && (
                             <section onClick={() => handleClick(recipe?._id)}>
@@ -184,6 +194,10 @@ const RecipeCard = ({ recipe, delay = 0 }: RecipeCardProps) => {
 
                                 <p className="mt-2 text-sm text-slate-400 line-clamp-3">
                                     {recipe?.description}
+                                </p>
+
+                                <p className="mt-2 text-sm text-slate-400 line-clamp-3">
+                                    Average <span className="font-bold text-yellow-500">ratings</span> ({rating})
                                 </p>
 
                                 {recipe?.images && (
