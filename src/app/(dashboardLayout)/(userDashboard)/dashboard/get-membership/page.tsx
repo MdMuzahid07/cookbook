@@ -11,7 +11,16 @@ const GetMembership = () => {
     const router = useRouter();
     const [price, setPrice] = useState(0);
     const { user } = useUser();
-    const { mutate: subscribePremium, isPending, isSuccess } = useGetPremiumSubscription();
+    const { mutate: subscribePremium, data, isPending, isSuccess, isError } = useGetPremiumSubscription();
+
+
+    const paymentLink = data?.data?.paymentResponse?.payment_url;
+    if (data) {
+        if (paymentLink) {
+            window.open(paymentLink, "_blank");
+        }
+    }
+
 
     const handleSelectChange = (e: any) => {
         const value = e.target.value;
@@ -48,9 +57,9 @@ const GetMembership = () => {
     }, [isPending, isSuccess, router]);
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
 
-        const userData = {
+        const userData = await {
             userId: user?.id,
             subscription: selectedOption
         }

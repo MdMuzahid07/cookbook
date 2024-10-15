@@ -14,13 +14,6 @@ export const useGetPremiumSubscription = () => {
             onSuccess: (data) => {
                 toast.success("you will redirect to payment page in few seconds", { id: "premiumMembership2452453" });
 
-
-                const paymentLink = data?.data?.paymentResponse?.payment_url;
-
-                if (paymentLink) {
-                    window.open(paymentLink, "_blank");
-                }
-
                 return data;
             },
             onError: (error: any) => {
