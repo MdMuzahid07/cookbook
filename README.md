@@ -1,37 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Recipe Sharing Community - CookBook
 
-First, run the development server:
+Welcome to the **Recipe Sharing Community**! This innovative web application is designed to connect culinary enthusiasts by providing a platform for sharing, discovering, and organizing recipes. Whether you're a home cook, culinary student, or simply passionate about cooking, our community is here to support your culinary journey.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The Recipe Sharing Community empowers users to:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Share Recipes**: Easily post favorite recipes with detailed ingredient lists and cooking instructions.
+- **Engage Socially**: Interact with other users through comments, ratings, and following features.
+- **Utilize Practical Tools**: Make use of an interactive ingredient checklist and a built-in cooking timer for a better cooking experience.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key Features
 
-## Learn More
+- **Secure User Authentication**: Robust registration and login processes utilizing JWT for secure sessions.
+- **Comprehensive Recipe Management**: Submit, update, and delete recipes with rich text formatting and image support.
+- **Interactive Tools**: Enjoy features like a built-in cooking timer and ingredient checklist to enhance your cooking process.
+- **Community Interaction**: Comment on recipes, rate them, and leverage an upvote/downvote system to highlight popular recipes.
+- **Advanced Search & Filtering**: Effortlessly find recipes using various filters such as ingredients, cooking times, and categories.
+- **Premium Subscription Model**: Gain access to exclusive features through a subscription-based model.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is built using cutting-edge technologies to ensure a smooth user experience:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend Framework**: [Next.js](https://nextjs.org/) for a powerful React-based framework.
+- **UI Library**: [NextUI](https://nextui.org/) for a modern and customizable design system.
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) for utility-first styling.
+- **State Management**: [React Query](https://tanstack.com/query/v3) for efficient data fetching and state management.
+- **HTTP Client**: [Axios](https://axios-http.com/) for making HTTP requests.
+- **Animations**: [Framer Motion](https://www.framer.com/docs/) for smooth animations and transitions.
+- **TypeScript**: Ensuring type safety and improving code quality throughout the project.
 
-## Deploy on Vercel
+## Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Follow these steps to set up the project locally:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# cookbook
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/MdMuzahid07/cookbook.git
+   cd cookbook
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the Application**: Open your browser and navigate to `http://localhost:3000`.
+
+## Usage
+
+- **User Registration/Login**: Create an account or log in to unlock personalized features.
+- **Recipe Submission**: Navigate to the recipe creation page to add and format your favorite recipes.
+- **Community Engagement**: Interact with fellow users by commenting on recipes, rating them, and following other users.
+- **Search Functionality**: Utilize the search feature to find recipes based on keywords, ingredients, or categories.
+
+## Credentials
+
+For testing purposes, you can use the following credentials to log in:
+
+### Admin Credentials
+- **Email**: `mdmuzahid.dev@gmail.com`
+- **Password**: `admin123`
+
+### User Credentials
+- **Email**: `mdmuzahid7396@gmail.com`
+- **Password**: `11111111`
