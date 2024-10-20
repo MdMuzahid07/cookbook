@@ -1,7 +1,3 @@
-Sure! Here’s the updated README file with technology names replaced by icons for a more visually appealing presentation:
-
----
-
 # Recipe Sharing Community - CookBook
 
 Welcome to the **Recipe Sharing Community**! This innovative web application is designed to connect culinary enthusiasts by providing a platform for sharing, discovering, and organizing recipes. Whether you're a home cook, culinary student, or simply passionate about cooking, our community is here to support your culinary journey.
