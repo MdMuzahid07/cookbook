@@ -1,3 +1,6 @@
+Sure! Here’s the updated README file with technology names replaced by icons for a more visually appealing presentation:
+
+---
 
 # Recipe Sharing Community - CookBook
 
@@ -15,7 +18,7 @@ The Recipe Sharing Community empowers users to:
 
 - **Secure User Authentication**: Robust registration and login processes utilizing JWT for secure sessions.
 - **Comprehensive Recipe Management**: Submit, update, and delete recipes with rich text formatting and image support.
-- **Interactive Tools**: Enjoy features like a built-in cooking timer and ingredient checklist to enhance your cooking process.
+- **Interactive Tools**: Enjoy features like a built-in ingredient checklist to enhance your cooking process.
 - **Community Interaction**: Comment on recipes, rate them, and leverage an upvote/downvote system to highlight popular recipes.
 - **Advanced Search & Filtering**: Effortlessly find recipes using various filters such as ingredients, cooking times, and categories.
 - **Premium Subscription Model**: Gain access to exclusive features through a subscription-based model.
@@ -24,13 +27,13 @@ The Recipe Sharing Community empowers users to:
 
 This project is built using cutting-edge technologies to ensure a smooth user experience:
 
-- **Frontend Framework**: [Next.js](https://nextjs.org/) for a powerful React-based framework.
-- **UI Library**: [NextUI](https://nextui.org/) for a modern and customizable design system.
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) for utility-first styling.
-- **State Management**: [React Query](https://tanstack.com/query/v3) for efficient data fetching and state management.
-- **HTTP Client**: [Axios](https://axios-http.com/) for making HTTP requests.
-- **Animations**: [Framer Motion](https://www.framer.com/docs/) for smooth animations and transitions.
-- **TypeScript**: Ensuring type safety and improving code quality throughout the project.
+- **Frontend Framework**: ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+- **UI Library**: ![NextUI](https://img.shields.io/badge/NextUI-0a192f?style=for-the-badge&logo=nextui&logoColor=white)
+- **Styling**: ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+- **State Management**: ![React Query](https://img.shields.io/badge/React%20Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)
+- **HTTP Client**: ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+- **Animations**: ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-0099FF?style=for-the-badge&logo=framer&logoColor=white)
+- **TypeScript**: ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 
 ## Installation
 
@@ -72,3 +75,17 @@ For testing purposes, you can use the following credentials to log in:
 ### User Credentials
 - **Email**: `mdmuzahid7396@gmail.com`
 - **Password**: `11111111`
+
+## License
+
+This project is licensed under the MIT License. For more details, please refer to the [LICENSE](LICENSE) file.
+
+## Contact
+
+For any inquiries or feedback, please feel free to reach out:
+
+- **Your Name**: [your.email@example.com](mailto:your.email@example.com)
+
+---
+
+Feel free to replace the placeholder email in the Contact section and let me know if you need any more adjustments!
