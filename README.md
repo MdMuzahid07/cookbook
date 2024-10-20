@@ -13,7 +13,7 @@ The Recipe Sharing Community empowers users to:
 ## Key Features
 
 - **Secure User Authentication**: Robust registration and login processes utilizing JWT for secure sessions.
-- **Comprehensive Recipe Management**: Submit, update, and delete recipes with rich text formatting and image support.
+- **Comprehensive Recipe Management**: Submit, update, and delete recipes.
 - **Interactive Tools**: Enjoy features like a built-in ingredient checklist to enhance your cooking process.
 - **Community Interaction**: Comment on recipes, rate them, and leverage an upvote/downvote system to highlight popular recipes.
 - **Advanced Search & Filtering**: Effortlessly find recipes using various filters such as ingredients, cooking times, and categories.
