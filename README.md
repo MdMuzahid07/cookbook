@@ -72,16 +72,6 @@ For testing purposes, you can use the following credentials to log in:
 - **Email**: `mdmuzahid7396@gmail.com`
 - **Password**: `11111111`
 
-## License
-
-This project is licensed under the MIT License. For more details, please refer to the [LICENSE](LICENSE) file.
-
-## Contact
-
-For any inquiries or feedback, please feel free to reach out:
-
-- **Your Name**: [your.email@example.com](mailto:your.email@example.com)
-
 ---
 
 Feel free to replace the placeholder email in the Contact section and let me know if you need any more adjustments!
