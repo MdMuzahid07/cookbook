@@ -1,4 +1,4 @@
-# Recipe Sharing Community - CookBook
+# Recipe Sharing Community - CookBook Client(Front-end)
 
 Welcome to the **Recipe Sharing Community**! This innovative web application is designed to connect culinary enthusiasts by providing a platform for sharing, discovering, and organizing recipes. Whether you're a home cook, culinary student, or simply passionate about cooking, our community is here to support your culinary journey.
 
